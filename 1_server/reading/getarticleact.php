@@ -10,7 +10,7 @@
     $uid = $_POST['userId'];
     $articleId = $_POST['articleId'];
     
-    $sql1 = "select * from action_1 where uid = '$uid' and articleId = '$articleId'";
+    $sql1 = "select * from action where uid = '$uid' and articleId = '$articleId'";
     $r1 = mysql_query($sql1);
     
     

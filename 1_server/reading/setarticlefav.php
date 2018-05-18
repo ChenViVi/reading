@@ -15,14 +15,14 @@ $favorite = $_POST['favorite'];
 
     $result = 0;
     
-    $sql ="select * from action_1 where uid = '{$uid}' and articleId='{$articleId}'";
+    $sql ="select * from action where uid = '{$uid}' and articleId='{$articleId}'";
     $r = mysql_query($sql);
     if($r && mysql_num_rows($r)){
   
-        $sql3 = "update action_1 set favorite = $favorite where  uid = '{$uid}' and articleId='{$articleId}'";
+        $sql3 = "update action set favorite = $favorite where  uid = '{$uid}' and articleId='{$articleId}'";
         $r=mysql_query($sql3);
     }else{
-        $sql1 = "insert into action_1(uid,articleId,favorite) values('{$uid}','{$articleId}','{$favorite}')";
+        $sql1 = "insert into action(uid,articleId,favorite) values('{$uid}','{$articleId}','{$favorite}')";
         $r = mysql_query($sql1);
     }
     

@@ -14,14 +14,14 @@ $collect = $_POST['collect'];
 
 $result = 0;
 
-$sql ="select * from action_1 where uid = '{$uid}' and articleId='{$articleId}'";
+$sql ="select * from action where uid = '{$uid}' and articleId='{$articleId}'";
 $r = mysql_query($sql);
 if($r && mysql_num_rows($r)){
 
-    $sql3 = "update action_1 set collect = $collect where  uid = '{$uid}' and articleId='{$articleId}'";
+    $sql3 = "update action set collect = $collect where  uid = '{$uid}' and articleId='{$articleId}'";
     $r=mysql_query($sql3);
 }else{
-    $sql1 = "insert into action_1(uid,articleId,collect) values('{$uid}','{$articleId}','{$collect}')";
+    $sql1 = "insert into action(uid,articleId,collect) values('{$uid}','{$articleId}','{$collect}')";
     $r = mysql_query($sql1);
 }
 

@@ -11,11 +11,11 @@ mysql_query("set names 'utf8'",$link);
 mysql_select_db($DBNAME);
 
 if($type == 0){
-    $sql1 ="select count(*) from comment_1 where articleId = $articleId order by id desc";
-    $sql2 ="select * from comment_1 where articleId = $articleId order by id desc";
+    $sql1 ="select count(*) from comment where articleId = $articleId order by id desc";
+    $sql2 ="select * from comment where articleId = $articleId order by id desc";
 }else{
-    $sql1 ="select count(*) from comment_1 where articleId = $articleId order by favoriteCt desc";
-    $sql2 ="select * from comment_1 where articleId = $articleId order by favoriteCt desc";
+    $sql1 ="select count(*) from comment where articleId = $articleId order by favoriteCt desc";
+    $sql2 ="select * from comment where articleId = $articleId order by favoriteCt desc";
 }
 
 $result = mysql_query($sql1);

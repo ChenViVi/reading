@@ -11,7 +11,7 @@ $id = $_POST['commentId'];
 
 $result = 0;
 
-$sql3 = "update comment_1 set favoriteCt = favoriteCt+1 where id = '{$id}'";
+$sql3 = "update comment set favoriteCt = favoriteCt+1 where id = '{$id}'";
 $r=mysql_query($sql3);
   
 $arr = array(

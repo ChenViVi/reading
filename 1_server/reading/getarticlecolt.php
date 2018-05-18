@@ -10,8 +10,8 @@
     $uid = $_POST['userId'];
 
     if(empty($articleId)){
-        $sql1 = "select count(*) from article,action_1 where article.id=action_1.articleId  and action_1.uid='$uid' and action_1.collect =1 order by article.id ";
-        $sql2 = "select article.* from article,action_1 where article.id=action_1.articleId  and action_1.uid='$uid' and action_1.collect =1 order by article.id ";
+        $sql1 = "select count(*) from article,action where article.id=action_1.articleId  and action_1.uid='$uid' and action_1.collect =1 order by article.id ";
+        $sql2 = "select article.* from article,action where article.id=action_1.articleId  and action_1.uid='$uid' and action_1.collect =1 order by article.id ";
     }
     $r1 = mysql_query($sql1);
 
