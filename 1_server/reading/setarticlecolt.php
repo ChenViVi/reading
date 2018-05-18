@@ -13,7 +13,6 @@ $articleId = $_POST['articleId'];
 $collect = $_POST['collect'];
 
 $result = 0;
-
 $sql ="select * from action where uid = '{$uid}' and articleId='{$articleId}'";
 $r = mysql_query($sql);
 if($r && mysql_num_rows($r)){
@@ -24,7 +23,6 @@ if($r && mysql_num_rows($r)){
     $sql1 = "insert into action(uid,articleId,collect) values('{$uid}','{$articleId}','{$collect}')";
     $r = mysql_query($sql1);
 }
-
 
 $arr = array(
     'result' => $result
