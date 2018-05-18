@@ -1,0 +1,11 @@
+package com.vivi.reading.util;
+
+/**
+ * Created by vivi on 2016/6/3.
+ */
+public class ConstUtils {
+    public static final String BASEURL = "http://139.199.32.74/reading/";
+    public static String BASEURL_DOWNLOAD = "http://121.42.179.44/download/";
+    public static String Tencent_APP_ID = "1105098316";
+    public static final String APP_ID = "wxaf610c1b8e5d1798";
+}

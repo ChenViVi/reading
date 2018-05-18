@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">同</string>
+
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+
+    <string name="item_nav_collect">我的收藏</string>
+    <string name="item_nav_type">分类</string>
+    <string name="item_nav_discuss">讨论</string>
+    <string name="item_nav_submit">我要投稿</string>
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/item_nav_collect</item>
+        <item>@string/item_nav_type</item>
+        <item>@string/item_nav_discuss</item>
+        <item>@string/item_nav_submit</item>
+    </string-array>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="loading_msg">请稍候...</string>
+</resources>

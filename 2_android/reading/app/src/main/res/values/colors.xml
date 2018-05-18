@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#ffffff</color>
+    <color name="primary_dark">#000000</color>
+    <color name="primary_light">#C8E6C9</color>
+    <color name="accent">#f3f3f5</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
+    <color name="textColorBlack">#000000</color>
+    <color name="textColorGray">#808080</color>
+    <color name="textColorWhite">#ffffff</color>
+
+    <color name="windowBackgroundGray">#282828</color>
+    <color name="windowBackgroundWhite">#ffffff</color>
+    <color name="windowBackgroundBlack">#000000</color>
+    <color name="windowBackgroundBlue">#0084ff</color>
+    <color name="canlendar_text_color">#323232</color>
+
+    <color name="transparent">#0000</color>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+</resources>
