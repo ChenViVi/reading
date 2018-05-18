@@ -41,13 +41,11 @@ public class TypeActivity extends Activity {
     private SharedPreferences preferences;
     private RequestQueue queue;
 
-    private int id;
     private ArrayList<Type> data = new ArrayList<>();
     private TypeAdapter adapter;
 
     private ListView listView;
     private ImageView ivBack;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +54,6 @@ public class TypeActivity extends Activity {
 
         queue = Volley.newRequestQueue(this);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        id = preferences.getInt("id",-1);
 
         listView = (ListView) findViewById(R.id.list_view);
         ivBack = (ImageView) findViewById(R.id.iv_back);
@@ -65,7 +62,7 @@ public class TypeActivity extends Activity {
         listView.setEmptyView(findViewById(R.id.layout_empty_collect));
 
         listView.setAdapter(adapter);
-        //queue.add(getArticleClotRequest(id));
+        queue.add(getArticleType());
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +75,7 @@ public class TypeActivity extends Activity {
         for (int i = 0; i < 10; i++){
             data.add(new Type(i, "name" + i));
         }
-        data.add(new Type(0,"排序算法"));
+        /*data.add(new Type(0,"排序算法"));
         data.add(new Type(1,"回归算法"));
         data.add(new Type(2,"正则化算法"));
         data.add(new Type(3,"决策树算法"));
@@ -96,21 +93,14 @@ public class TypeActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Type type = data.get(position);
             }
-        });
+        });*/
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //queue.add(getArticleClotRequest(id));
-    }
-
-    private StringRequest getArticleClotRequest(final int userId) {
-        StringRequest request = new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "getarticlecolt.php",
+    private StringRequest getArticleType() {
+        StringRequest request = new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "getarticletype.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Log.e("articleIdFlag","getArticleRequest() response" + response);
                         int result = 0;
                         String list = "";
                         try {
@@ -121,7 +111,7 @@ public class TypeActivity extends Activity {
                             e.printStackTrace();
                         }
                         if (result != 0){
-                            Toast.makeText(TypeActivity.this, "获取文章失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(TypeActivity.this, "获取文章分类失败", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Gson gson = new Gson();
@@ -138,14 +128,7 @@ public class TypeActivity extends Activity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(TypeActivity.this, "网络连接超时", Toast.LENGTH_SHORT).show();
             }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<>();
-                map.put("userId",String.valueOf(userId));
-                return map;
-            }
-        };
+        });
         request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         return request;
     }
