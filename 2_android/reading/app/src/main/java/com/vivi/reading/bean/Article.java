@@ -6,11 +6,11 @@ package com.vivi.reading.bean;
 public class Article {
     private int id;
     private String title;
-    private String info1;
-    private String info2;
-    private String author;
+    private String info;
+
+    private String type;
     private String date;
-    private String imgUrl;
+
     private String content;
     private int result;
 
@@ -18,12 +18,9 @@ public class Article {
         return id;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
 
-    public String getAuthor() {
-        return author;
+    public String getType() {
+        return type;
     }
 
     public String getContent() {
@@ -34,12 +31,8 @@ public class Article {
         return date;
     }
 
-    public String getInfo1() {
-        return info1;
-    }
-
-    public String getInfo2() {
-        return info2;
+    public String getInfo() {
+        return info;
     }
 
     public String getTitle() {

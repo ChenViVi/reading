@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -80,7 +81,7 @@ public class CollectActivity extends Activity {
                 intent.putExtra("articleId",article.getId());
                 intent.putExtra("title",article.getTitle());
                 intent.putExtra("date",article.getDate());
-                intent.putExtra("author",article.getAuthor());
+                intent.putExtra("author",article.getType());
                 intent.putExtra("content",article.getContent());
                 intent.putExtra("fromCollect",true);
                 startActivity(intent);
@@ -99,7 +100,6 @@ public class CollectActivity extends Activity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        //Log.e("articleIdFlag","getArticleRequest() response" + response);
                         int result = 0;
                         String list = "";
                         try {

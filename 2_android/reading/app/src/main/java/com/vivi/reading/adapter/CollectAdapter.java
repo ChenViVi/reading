@@ -78,10 +78,8 @@ public class CollectAdapter extends BaseAdapter {
         viewHolder.nivArticleImg.setDefaultImageResId(R.drawable.img_default);
         viewHolder.nivArticleImg.setErrorImageResId(R.drawable.img_default);
         viewHolder.nivArticleImg.setErrorImageResId(R.drawable.img_default);
-        viewHolder.nivArticleImg.setImageUrl(ConstUtils.BASEURL + "img/" + article.getImgUrl(),new ImageLoader(queue, new BitmapCache()));
         viewHolder.tvTitle.setText(article.getTitle());
-        viewHolder.tvInfo1.setText(article.getInfo1()+"，");
-        viewHolder.tvInfo2.setText(article.getInfo2());
+        viewHolder.tvInfo1.setText(article.getInfo());
         viewHolder.tvDate.setText(article.getDate());
         return convertView;
     }

@@ -21,8 +21,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -30,7 +28,6 @@ import com.vivi.reading.R;
 import com.vivi.reading.bean.Action;
 import com.vivi.reading.bean.Article;
 import com.vivi.reading.ui.fragment.DrawerFragment;
-import com.vivi.reading.util.BitmapCache;
 import com.vivi.reading.util.ConstUtils;
 
 import java.util.HashMap;
@@ -101,9 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("articleId", article.getId());
                 intent.putExtra("title", article.getTitle());
                 intent.putExtra("date", article.getDate());
-                intent.putExtra("author", article.getAuthor());
+                intent.putExtra("author", article.getType());
                 intent.putExtra("content", article.getContent());
-                intent.putExtra("imgUrl", article.getImgUrl());
                 intent.putExtra("collect",collect);
                 intent.putExtra("favorite",favoriteFlag);
                 intent.putExtra("comment",true);
@@ -132,9 +128,8 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("articleId", article.getId());
                         intent.putExtra("title", article.getTitle());
                         intent.putExtra("date", article.getDate());
-                        intent.putExtra("author", article.getAuthor());
+                        intent.putExtra("author", article.getType());
                         intent.putExtra("content", article.getContent());
-                        intent.putExtra("imgUrl", article.getImgUrl());
                         intent.putExtra("collect",collect);
                         intent.putExtra("favorite",favoriteFlag);
                         startActivity(intent);
@@ -197,9 +192,9 @@ public class MainActivity extends AppCompatActivity {
                         } else if (article.getResult() == 0) {
                             articleIdFlag = article.getId();
                             tvArticleTitle.setText(article.getTitle());
-                            tvArticleInfo1.setText(article.getInfo1());
+                            tvArticleInfo1.setText(article.getInfo());
                             tvArticleDate.setText(article.getDate());
-                            tvArticleAuthor.setText(article.getAuthor());
+                            tvArticleAuthor.setText(article.getType());
                             queue.add(getActionRequest(userId,articleIdFlag));
                         }
                     }
@@ -237,9 +232,9 @@ public class MainActivity extends AppCompatActivity {
                         } else if (article.getResult() == 0) {
                             articleIdFlag = article.getId();
                             tvArticleTitle.setText(article.getTitle());
-                            tvArticleInfo1.setText(article.getInfo1());
+                            tvArticleInfo1.setText(article.getInfo());
                             tvArticleDate.setText(article.getDate());
-                            tvArticleAuthor.setText(article.getAuthor());
+                            tvArticleAuthor.setText(article.getType());
                             queue.add(getActionRequest(userId,articleIdFlag));
                         }
                     }
