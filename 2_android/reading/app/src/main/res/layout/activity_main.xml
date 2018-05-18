@@ -34,7 +34,7 @@
                 android:textSize="40sp"
                 android:text="目送"/>
             <TextView
-                android:id="@+id/tv_article_info1"
+                android:id="@+id/tv_article_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="10dp"

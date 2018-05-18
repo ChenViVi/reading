@@ -33,6 +33,7 @@
         <activity android:name=".ui.activity.CollectActivity" />
         <activity android:name=".ui.activity.SubmitActivity" />
         <activity android:name=".ui.activity.EditActivity" />
+        <activity android:name=".ui.activity.TypeDetailActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"

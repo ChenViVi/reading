@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         drawerFragment = (DrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         layout = (LinearLayout) findViewById(R.id.layout_article_info);
         tvArticleTitle = (TextView) findViewById(R.id.tv_article_title);
-        tvArticleInfo1 = (TextView) findViewById(R.id.tv_article_info1);
+        tvArticleInfo1 = (TextView) findViewById(R.id.tv_article_info);
         tvArticleDate = (TextView) findViewById(R.id.tv_article_date);
         tvArticleAuthor = (TextView) findViewById(R.id.tv_action_author);
         ivFavorite = (ImageView) findViewById(R.id.iv_favorite);

@@ -43,7 +43,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="10dp">
                 <TextView
-                    android:id="@+id/tv_article_info1"
+                    android:id="@+id/tv_article_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColorWhite"
@@ -55,8 +55,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColorWhite"
                     android:text="只能一个人走"
-                    android:layout_toEndOf="@id/tv_article_info1"
-                    android:layout_toRightOf="@id/tv_article_info1"/>
+                    android:layout_toEndOf="@id/tv_article_info"
+                    android:layout_toRightOf="@id/tv_article_info"/>
 
                 <TextView
                     android:id="@+id/tv_article_date"

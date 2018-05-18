@@ -8,12 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.vivi.reading.R;
 
-import com.vivi.reading.util.BitmapCache;
-import com.vivi.reading.util.ConstUtils;
 import com.vivi.reading.bean.Article;
 
 import java.util.ArrayList;
@@ -36,14 +33,12 @@ public class CollectAdapter extends BaseAdapter {
     class ViewHolder{
         NetworkImageView nivArticleImg;
         TextView tvTitle;
-        TextView tvInfo1;
-        TextView tvInfo2;
+        TextView tvInfo;
         TextView tvDate;
         ViewHolder(View view){
             nivArticleImg = (NetworkImageView) view.findViewById(R.id.niv_article_img);
             tvTitle = (TextView) view.findViewById(R.id.tv_article_title);
-            tvInfo1 = (TextView) view.findViewById(R.id.tv_article_info1);
-            tvInfo2 = (TextView) view.findViewById(R.id.tv_article_info2);
+            tvInfo = (TextView) view.findViewById(R.id.tv_article_info);
             tvDate = (TextView) view.findViewById(R.id.tv_article_date);
         }
     }
@@ -79,7 +74,7 @@ public class CollectAdapter extends BaseAdapter {
         viewHolder.nivArticleImg.setErrorImageResId(R.drawable.img_default);
         viewHolder.nivArticleImg.setErrorImageResId(R.drawable.img_default);
         viewHolder.tvTitle.setText(article.getTitle());
-        viewHolder.tvInfo1.setText(article.getInfo());
+        viewHolder.tvInfo.setText(article.getInfo());
         viewHolder.tvDate.setText(article.getDate());
         return convertView;
     }
