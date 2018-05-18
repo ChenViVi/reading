@@ -7,16 +7,18 @@ mysql_select_db($DBNAME);
 mysql_set_charset('utf8');
 
 $sql2 = "select * from article_type";
-$arr = array();
+$arr2 = array();
 $result = mysql_query($sql2);
 while ($row =mysql_fetch_assoc($result)){
-    array_push($arr, array(
-        'result' => 0,
+    array_push($arr2, array(
         'id' => $row['id'],
         'name' => $row['name'],
     ));
 }
-
+$arr = array(
+    'result' => 0,
+    'list' => $arr2
+);
 $strr = json_encode($arr);
 mysql_close($link);
 echo($strr);
