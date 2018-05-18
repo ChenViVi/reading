@@ -38,13 +38,14 @@ if($total_num != 0 ){
     while ($row =mysql_fetch_assoc($result)){
 
         $uid = $row['uid'];
-        $sql1 = "select * from user where name = '$uid'";
+        $sql1 = "select * from user where id = '$uid'";
         $r1 = mysql_query($sql1);
         $row2 = mysql_fetch_assoc($r1);
 
         $arrTemp = array(
             'id' => $row['id'],
             'uid' => $row['uid'],
+            'name' => $row2['name'],
             'date' => $row['date'],
             'content' => $row['content'],
             'favoriteCt' => $row['favoriteCt']
