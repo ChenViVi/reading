@@ -1,8 +1,10 @@
 package com.vivi.reading.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,6 +64,20 @@ public class TypeDetailActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Article article = data.get(position);
+                Intent intent = new Intent(TypeDetailActivity.this,ArticleDetailActivity.class);
+                intent.putExtra("articleId",article.getId());
+                intent.putExtra("title",article.getTitle());
+                intent.putExtra("date",article.getDate());
+                intent.putExtra("author",article.getType());
+                intent.putExtra("content",article.getContent());
+                intent.putExtra("fromCollect",true);
+                startActivity(intent);
             }
         });
     }
