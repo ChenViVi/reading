@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -23,7 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivi.reading.R;
-import com.vivi.reading.adapter.CollectAdapter;
+import com.vivi.reading.adapter.ArticleAdapter;
 import com.vivi.reading.bean.Article;
 import com.vivi.reading.util.ConstUtils;
 
@@ -42,7 +41,7 @@ public class CollectActivity extends Activity {
 
     private int id;
     private ArrayList<Article> data = new ArrayList<>();
-    private CollectAdapter adapter;
+    private ArticleAdapter adapter;
 
     private ListView listView;
     private ImageView ivBack;
@@ -60,7 +59,7 @@ public class CollectActivity extends Activity {
         listView = (ListView) findViewById(R.id.list_view);
         ivBack = (ImageView) findViewById(R.id.iv_back);
 
-        adapter = new CollectAdapter(this,data,queue);
+        adapter = new ArticleAdapter(this,data,queue);
         listView.setEmptyView(findViewById(R.id.layout_empty_collect));
 
         listView.setAdapter(adapter);

@@ -18,25 +18,23 @@ import java.util.ArrayList;
 /**
  * Created by vivi on 2016/6/2.
  */
-public class CollectAdapter extends BaseAdapter {
+public class ArticleAdapter extends BaseAdapter {
 
     private RequestQueue queue;
     private Context context;
     private ArrayList<Article> data;
 
-    public CollectAdapter(Context context, ArrayList<Article> data, RequestQueue queue){
+    public ArticleAdapter(Context context, ArrayList<Article> data, RequestQueue queue){
         this.context = context;
         this.data = data;
         this.queue = queue;
     }
 
     class ViewHolder{
-        NetworkImageView nivArticleImg;
         TextView tvTitle;
         TextView tvInfo;
         TextView tvDate;
         ViewHolder(View view){
-            nivArticleImg = (NetworkImageView) view.findViewById(R.id.niv_article_img);
             tvTitle = (TextView) view.findViewById(R.id.tv_article_title);
             tvInfo = (TextView) view.findViewById(R.id.tv_article_info);
             tvDate = (TextView) view.findViewById(R.id.tv_article_date);
@@ -70,9 +68,6 @@ public class CollectAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Article article = getItem(position);
-        viewHolder.nivArticleImg.setDefaultImageResId(R.drawable.img_default);
-        viewHolder.nivArticleImg.setErrorImageResId(R.drawable.img_default);
-        viewHolder.nivArticleImg.setErrorImageResId(R.drawable.img_default);
         viewHolder.tvTitle.setText(article.getTitle());
         viewHolder.tvInfo.setText(article.getInfo());
         viewHolder.tvDate.setText(article.getDate());

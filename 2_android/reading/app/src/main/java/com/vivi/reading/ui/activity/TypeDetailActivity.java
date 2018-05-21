@@ -1,9 +1,7 @@
 package com.vivi.reading.ui.activity;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,10 +19,8 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivi.reading.R;
-import com.vivi.reading.adapter.CollectAdapter;
-import com.vivi.reading.adapter.TypeAdapter;
+import com.vivi.reading.adapter.ArticleAdapter;
 import com.vivi.reading.bean.Article;
-import com.vivi.reading.bean.Type;
 import com.vivi.reading.util.ConstUtils;
 
 import org.json.JSONException;
@@ -40,7 +36,7 @@ public class TypeDetailActivity extends Activity {
     private RequestQueue queue;
 
     private ArrayList<Article> data = new ArrayList<>();
-    private CollectAdapter adapter;
+    private ArticleAdapter adapter;
 
     private ListView listView;
     private ImageView ivBack;
@@ -58,7 +54,7 @@ public class TypeDetailActivity extends Activity {
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvTitle.setText(getIntent().getStringExtra("name"));
 
-        adapter = new CollectAdapter(this,data,queue);
+        adapter = new ArticleAdapter(this,data,queue);
 
         listView.setAdapter(adapter);
         queue.add(getArticle(getIntent().getIntExtra("id",1)));
