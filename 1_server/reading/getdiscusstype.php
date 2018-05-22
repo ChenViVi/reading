@@ -6,7 +6,7 @@ mysql_query("set names 'utf8'",$link);
 mysql_select_db($DBNAME);
 mysql_set_charset('utf8');
 
-$sql2 = "select * from article_type";
+$sql2 = "select * from discuss_type";
 $arr2 = array();
 $result = mysql_query($sql2);
 while ($row =mysql_fetch_assoc($result)){
