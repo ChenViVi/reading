@@ -156,7 +156,10 @@ public class MainActivity extends AppCompatActivity {
                         //mDrawerLayout.closeDrawers();
                         break;
                     case 1:
-                        intent = new Intent(MainActivity.this, TypeActivity.class);
+                        intent = new Intent(MainActivity.this, ArticleTypeActivity.class);
+                        break;
+                    case 2:
+                        intent = new Intent(MainActivity.this, DiscussActivity.class);
                         break;
                     case 3:
                         intent = new Intent(MainActivity.this, SubmitActivity.class);

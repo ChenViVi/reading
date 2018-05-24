@@ -25,8 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -34,8 +32,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.vivi.reading.R;
 import com.vivi.reading.util.ConstUtils;
-import com.vivi.reading.util.UILImageLoader;
-import com.vivi.reading.util.UILPauseOnScrollListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,13 +42,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import cn.finalteam.galleryfinal.CoreConfig;
-import cn.finalteam.galleryfinal.FunctionConfig;
-import cn.finalteam.galleryfinal.GalleryFinal;
-import cn.finalteam.galleryfinal.PauseOnScrollListener;
-import cn.finalteam.galleryfinal.ThemeConfig;
-import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener {
@@ -69,10 +58,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     private RequestQueue queue;
     private final int REQUEST_CODE_CAMERA = 1000;
     private final int REQUEST_CODE_GALLERY = 1001;
-
-    private List<PhotoInfo> photoList = new ArrayList<>();
-
-    private FunctionConfig functionConfig;
     private DisplayImageOptions options;
 
     private ImageView ivBack;
@@ -174,13 +159,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         layoutUserName.setOnClickListener(this);
         layoutUserSign.setOnClickListener(this);
         tvUserName.setOnClickListener(this);
-
-        options = new DisplayImageOptions.Builder()
-                .showImageOnFail(R.drawable.ic_gf_default_photo)
-                .showImageForEmptyUri(R.drawable.ic_gf_default_photo)
-                .showImageOnLoading(R.drawable.ic_gf_default_photo).build();
-        initGalleryFinal();
-        initFresco();
         initImageLoader(this);
         //ImageLoader.getInstance().displayImage("http://simg.sinajs.cn/blog7style/images/common/godreply/btn.png",nivUserImg, options);
     }
@@ -276,57 +254,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         return request;
     }
 
-    private void initGalleryFinal() {
-        ThemeConfig theme = new ThemeConfig.Builder()
-                .setTitleBarBgColor(Color.WHITE)
-                .setTitleBarTextColor(Color.GRAY)
-                .setTitleBarIconColor(Color.GRAY)
-                .setFabNornalColor(Color.GRAY)
-                .setFabPressedColor(Color.DKGRAY)
-                .setCheckSelectedColor(Color.GRAY)
-                .setCheckNornalColor(Color.WHITE)
-                .build();
-        FunctionConfig.Builder functionConfigBuilder = new FunctionConfig.Builder();
-        cn.finalteam.galleryfinal.ImageLoader imageLoader;
-        PauseOnScrollListener pauseOnScrollListener = new UILPauseOnScrollListener(false, true);
-        imageLoader = new UILImageLoader();
 
-        functionConfigBuilder.setMutiSelectMaxSize(1);
-        functionConfigBuilder.setEnableCamera(true);
-        functionConfigBuilder.setEnablePreview(true);
-        functionConfigBuilder.setEnableEdit(true);
-        functionConfigBuilder.setEnableCrop(true);
-        functionConfigBuilder.setForceCrop(true);
-        functionConfigBuilder.setCropHeight(150);
-        functionConfigBuilder.setCropWidth(150);
-
-        functionConfig = functionConfigBuilder.build();
-
-
-        CoreConfig coreConfig = new CoreConfig.Builder(UserActivity.this, imageLoader, theme)
-                .setFunctionConfig(functionConfig)
-                .setPauseOnScrollListener(pauseOnScrollListener)
-                .setNoAnimcation(true)
-                .build();
-        GalleryFinal.init(coreConfig);
-    }
-
-    private GalleryFinal.OnHanlderResultCallback onHanlderResultCallback = new GalleryFinal.OnHanlderResultCallback() {
-        @Override
-        public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
-            if (resultList != null) {
-                photoList.clear();
-                photoList.addAll(resultList);
-                PhotoInfo photoInfo = photoList.get(0);
-                ImageLoader.getInstance().displayImage("file:/" + photoInfo.getPhotoPath(),nivUserImg, options);
-            }
-        }
-
-        @Override
-        public void onHanlderFailure(int requestCode, String errorMsg) {
-            Toast.makeText(UserActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
-        }
-    };
 
     private void initImageLoader(Context context) {
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
@@ -340,12 +268,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         ImageLoader.getInstance().init(config.build());
     }
 
-    private void initFresco() {
-        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
-                .setBitmapsConfig(Bitmap.Config.ARGB_8888)
-                .build();
-        Fresco.initialize(this, config);
-    }
 
     private String toBase64(String path){
         Bitmap bitmap = BitmapFactory.decodeFile(path);

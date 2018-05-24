@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.ArticleDetailActivity" />
-        <activity android:name=".ui.activity.TypeActivity" />
+        <activity android:name=".ui.activity.ArticleTypeActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.SignActivity" />
         <activity android:name=".ui.activity.UserActivity"></activity>
@@ -34,6 +34,7 @@
         <activity android:name=".ui.activity.SubmitActivity" />
         <activity android:name=".ui.activity.EditActivity" />
         <activity android:name=".ui.activity.TypeDetailActivity" />
+        <activity android:name=".ui.activity.DiscussActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"

@@ -7,10 +7,6 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:textColorPrimary">@color/textColorGray</item>
-        <item name="android:windowBackground">@color/windowBackgroundWhite</item>
-        <item name="actionSheetStyle">@style/ActionSheetStyleiOS7</item>
     </style>
 
     <style name="NoBarTheme" parent="MyMaterialTheme.Base.NoBar"/>
@@ -20,28 +16,6 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:textColorPrimary">@color/textColorGray</item>
-        <item name="android:windowBackground">@color/windowBackgroundWhite</item>
-        <item name="actionSheetStyle">@style/ActionSheetStyleiOS7</item>
-    </style>
-
-
-
-    <!-- iOS7 Style -->
-    <style name="ActionSheetStyleiOS7">
-        <item name="actionSheetBackground">@android:color/transparent</item>
-        <item name="cancelButtonBackground">@drawable/slt_as_ios7_cancel_bt</item>
-        <item name="otherButtonTopBackground">@drawable/slt_as_ios7_other_bt_top</item>
-        <item name="otherButtonMiddleBackground">@drawable/slt_as_ios7_other_bt_middle</item>
-        <item name="otherButtonBottomBackground">@drawable/slt_as_ios7_other_bt_bottom</item>
-        <item name="otherButtonSingleBackground">@drawable/slt_as_ios7_other_bt_single</item>
-        <item name="cancelButtonTextColor">@color/textColorGray</item>
-        <item name="otherButtonTextColor">@color/textColorGray</item>
-        <item name="actionSheetPadding">10dp</item>
-        <item name="otherButtonSpacing">0dp</item>
-        <item name="cancelButtonMarginTop">10dp</item>
-        <item name="actionSheetTextSize">12sp</item>
     </style>
 
     <style name="dialog" parent="@android:style/Theme.Dialog">
