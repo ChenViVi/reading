@@ -36,6 +36,7 @@
         <activity android:name=".ui.activity.TypeDetailActivity" />
         <activity android:name=".ui.activity.DiscussActivity" />
         <activity android:name=".ui.activity.DiscussDetailActivity" />
+        <activity android:name=".ui.activity.AddDiscussActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"

@@ -1,10 +1,13 @@
 package com.vivi.reading.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -33,6 +36,7 @@ public class DiscussActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private TextView tvAdd;
     private TabViewPagerAdapter adapterTab;
 
     @Override
@@ -42,10 +46,18 @@ public class DiscussActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager= (ViewPager) findViewById(R.id.viewPager);
+        tvAdd = findViewById(R.id.tv_add);
         adapterTab = new TabViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterTab);
         tabLayout.setupWithViewPager(viewPager);
         queue.add(getType());
+        tvAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DiscussActivity.this, AddDiscussActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     protected void addFragment(Fragment fragment, String title){

@@ -13,10 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:minHeight="?attr/actionBarSize"
-        android:background="@drawable/bg_toolbar"
+        android:background="#000000"
         local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         local:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

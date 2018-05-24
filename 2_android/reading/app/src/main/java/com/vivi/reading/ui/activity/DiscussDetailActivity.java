@@ -52,10 +52,11 @@ public class DiscussDetailActivity extends AppCompatActivity {
     private ArrayList<DiscussComment> data = new ArrayList<>();
 
     private ListView listView;
-    private TextView tvArticleTitle;
-    private TextView tvArticleDate;
-    private TextView tvArticleAuthor;
-    private TextView tvArticleContent;
+    private TextView tvDiscussTitle;
+    private TextView tvDate;
+    private TextView tvAuthor;
+    private TextView tvContent;
+    private TextView tvTitle;
     private ImageView ivBack;
     private EditText editComment;
     private TextView tvComment;
@@ -74,16 +75,17 @@ public class DiscussDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         discuss = (Discuss) intent.getSerializableExtra("discuss");
 
-        View layout = getLayoutInflater().inflate(R.layout.header_article_detail,null);
-        tvArticleTitle = (TextView) layout.findViewById(R.id.tv_article_title);
-        tvArticleDate = (TextView) layout.findViewById(R.id.tv_article_date);
-        tvArticleAuthor = (TextView) layout.findViewById(R.id.tv_action_author);
-        tvArticleContent = (TextView) layout.findViewById(R.id.tv_article_content);
-        ivBack = (ImageView) layout.findViewById(R.id.iv_back);
-        editComment = (EditText) findViewById(R.id.edit_comment);
-        tvComment = (TextView) findViewById(R.id.tv_comment);
-        layoutCommnet = (RelativeLayout) findViewById(R.id.layout_comment);
-        listView = (ListView) findViewById(R.id.list_view);
+        View layout = getLayoutInflater().inflate(R.layout.header_discuss_detail,null);
+        tvDiscussTitle = layout.findViewById(R.id.tv_article_title);
+        tvDate = layout.findViewById(R.id.tv_article_date);
+        tvAuthor = layout.findViewById(R.id.tv_action_author);
+        tvContent = layout.findViewById(R.id.tv_article_content);
+        tvTitle = layout.findViewById(R.id.tv_title);
+        ivBack = layout.findViewById(R.id.iv_back);
+        editComment = findViewById(R.id.edit_comment);
+        tvComment = findViewById(R.id.tv_comment);
+        layoutCommnet = findViewById(R.id.layout_comment);
+        listView = findViewById(R.id.list_view);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,10 +122,11 @@ public class DiscussDetailActivity extends AppCompatActivity {
             listView.setStackFromBottom(true);
             listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
         }
-        tvArticleTitle.setText(discuss.getTitle());
-        tvArticleDate.setText(discuss.getDate());
-        tvArticleAuthor.setText(discuss.getUser());
-        tvArticleContent.setText(discuss.getContent());
+        tvDiscussTitle.setText(discuss.getTitle());
+        tvTitle.setText(discuss.getTitle());
+        tvDate.setText(discuss.getDate());
+        tvAuthor.setText(discuss.getUser());
+        tvContent.setText(discuss.getContent());
     }
 
     public void onFocusChange(final boolean hasFocus){

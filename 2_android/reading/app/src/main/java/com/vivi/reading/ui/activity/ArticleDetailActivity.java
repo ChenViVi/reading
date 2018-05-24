@@ -92,16 +92,22 @@ public class ArticleDetailActivity extends AppCompatActivity {
         favoriteFlag= intent.getIntExtra("favorite",0);
 
         View layout = getLayoutInflater().inflate(R.layout.header_article_detail,null);
-        tvArticleTitle = (TextView) layout.findViewById(R.id.tv_article_title);
-        tvArticleDate = (TextView) layout.findViewById(R.id.tv_article_date);
-        tvArticleAuthor = (TextView) layout.findViewById(R.id.tv_action_author);
-        tvArticleContent = (TextView) layout.findViewById(R.id.tv_article_content);
-        ivFavorite = (ImageView) layout.findViewById(R.id.iv_favorite);
-        ivBack = (ImageView) layout.findViewById(R.id.iv_back);
-        editComment = (EditText) findViewById(R.id.edit_comment);
-        tvComment = (TextView) findViewById(R.id.tv_comment);
-        layoutCommnet = (RelativeLayout) findViewById(R.id.layout_comment);
-        listView = (ListView) findViewById(R.id.list_view);
+        tvArticleTitle = layout.findViewById(R.id.tv_article_title);
+        tvArticleDate = layout.findViewById(R.id.tv_article_date);
+        tvArticleAuthor = layout.findViewById(R.id.tv_action_author);
+        tvArticleContent = layout.findViewById(R.id.tv_article_content);
+        ivCollect = layout.findViewById(R.id.iv_collect);
+        ivFavorite = layout.findViewById(R.id.iv_favorite);
+        ivShare = layout.findViewById(R.id.iv_share);
+        ivBack = layout.findViewById(R.id.iv_back);
+        editComment = findViewById(R.id.edit_comment);
+        tvComment = findViewById(R.id.tv_comment);
+        layoutCommnet = findViewById(R.id.layout_comment);
+        layoutHot = layout.findViewById(R.id.layout_comment_hot);
+        layoutNew = layout.findViewById(R.id.layout_comment_new);
+        listView = findViewById(R.id.list_view);
+        ivLineNew = layout.findViewById(R.id.iv_line_new);
+        ivLineHot = layout.findViewById(R.id.iv_line_hot);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
