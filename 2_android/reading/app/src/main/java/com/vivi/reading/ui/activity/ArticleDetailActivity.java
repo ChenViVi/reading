@@ -25,8 +25,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -36,7 +34,6 @@ import com.vivi.reading.adapter.CommentAdapter;
 import com.vivi.reading.bean.Action;
 import com.vivi.reading.bean.Comment;
 import com.vivi.reading.ui.view.ShareDialog;
-import com.vivi.reading.util.BitmapCache;
 import com.vivi.reading.util.ConstUtils;
 
 import org.json.JSONException;
@@ -99,18 +96,12 @@ public class ArticleDetailActivity extends AppCompatActivity {
         tvArticleDate = (TextView) layout.findViewById(R.id.tv_article_date);
         tvArticleAuthor = (TextView) layout.findViewById(R.id.tv_action_author);
         tvArticleContent = (TextView) layout.findViewById(R.id.tv_article_content);
-        ivCollect = (ImageView) layout.findViewById(R.id.iv_collect);
         ivFavorite = (ImageView) layout.findViewById(R.id.iv_favorite);
-        ivShare = (ImageView) layout.findViewById(R.id.iv_share);
         ivBack = (ImageView) layout.findViewById(R.id.iv_back);
         editComment = (EditText) findViewById(R.id.edit_comment);
         tvComment = (TextView) findViewById(R.id.tv_comment);
         layoutCommnet = (RelativeLayout) findViewById(R.id.layout_comment);
-        layoutHot = (LinearLayout) layout.findViewById(R.id.layout_comment_hot);
-        layoutNew = (LinearLayout) layout.findViewById(R.id.layout_comment_new);
         listView = (ListView) findViewById(R.id.list_view);
-        ivLineNew = (ImageView) layout.findViewById(R.id.iv_line_new);
-        ivLineHot = (ImageView) layout.findViewById(R.id.iv_line_hot);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override

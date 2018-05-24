@@ -1,10 +1,12 @@
 package com.vivi.reading.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import com.vivi.reading.R;
 import com.vivi.reading.adapter.DiscussAdapter;
 import com.vivi.reading.bean.Discuss;
+import com.vivi.reading.ui.activity.DiscussDetailActivity;
 import com.vivi.reading.util.ConstUtils;
 
 import org.json.JSONException;
@@ -49,6 +52,17 @@ public class DiscussFragment extends Fragment{
         adapter = new DiscussAdapter(getActivity(),data);
         listView.setAdapter(adapter);
         mQueue.add(getDiscussRequest(getArguments().getInt("id")));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Discuss discuss = data.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("discuss", discuss);
+                Intent intent = new Intent(getActivity(),DiscussDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
 

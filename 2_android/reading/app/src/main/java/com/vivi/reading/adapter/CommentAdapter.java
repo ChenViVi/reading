@@ -73,7 +73,7 @@ public class CommentAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_comment,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_article_comment,null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }

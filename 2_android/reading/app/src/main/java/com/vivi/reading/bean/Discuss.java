@@ -1,10 +1,12 @@
 package com.vivi.reading.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by vivi on 2018/4/14.
  */
 
-public class Discuss {
+public class Discuss implements Serializable{
     private int id;
     private String user;
     private String type;

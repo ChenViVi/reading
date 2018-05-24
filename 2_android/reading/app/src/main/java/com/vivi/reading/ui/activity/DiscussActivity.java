@@ -1,20 +1,12 @@
 package com.vivi.reading.ui.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,9 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivi.reading.R;
-import com.vivi.reading.adapter.ArticleAdapter;
 import com.vivi.reading.adapter.TabViewPagerAdapter;
-import com.vivi.reading.bean.Article;
 import com.vivi.reading.bean.DiscussType;
 import com.vivi.reading.ui.fragment.DiscussFragment;
 import com.vivi.reading.util.ConstUtils;
@@ -35,10 +25,7 @@ import com.vivi.reading.util.ConstUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DiscussActivity extends AppCompatActivity {
 

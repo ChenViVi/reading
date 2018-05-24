@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.NetworkImageView;
 import com.vivi.reading.R;
 
 import com.vivi.reading.bean.Article;

@@ -8,29 +8,29 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.vivi.reading.R;
-import com.vivi.reading.bean.Discuss;
+import com.vivi.reading.bean.DiscussComment;
 
 import java.util.ArrayList;
 
 /**
  * Created by vivi on 2016/6/2.
  */
-public class DiscussAdapter extends BaseAdapter {
+public class DiscussCommentAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Discuss> data;
+    private ArrayList<DiscussComment> data;
 
-    public DiscussAdapter(Context context, ArrayList<Discuss> data){
+    public DiscussCommentAdapter(Context context, ArrayList<DiscussComment> data){
         this.context = context;
         this.data = data;
     }
 
     class ViewHolder{
-        TextView tvTitle;
+        TextView tvName;
         TextView tvContent;
         TextView tvDate;
         ViewHolder(View view){
-            tvTitle = view.findViewById(R.id.tv_title);
+            tvName = view.findViewById(R.id.tv_name);
             tvContent = view.findViewById(R.id.tv_content);
             tvDate = view.findViewById(R.id.tv_date);
         }
@@ -42,7 +42,7 @@ public class DiscussAdapter extends BaseAdapter {
     }
 
     @Override
-    public Discuss getItem(int position) {
+    public DiscussComment getItem(int position) {
         return data.get(position);
     }
 
@@ -55,15 +55,15 @@ public class DiscussAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_discuss,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_discuss_comment,null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
         else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Discuss discuss = getItem(position);
-        viewHolder.tvTitle.setText(discuss.getTitle());
+        DiscussComment discuss = getItem(position);
+        viewHolder.tvName.setText(discuss.getUser());
         viewHolder.tvContent.setText(discuss.getContent());
         viewHolder.tvDate.setText(discuss.getDate());
         return convertView;
