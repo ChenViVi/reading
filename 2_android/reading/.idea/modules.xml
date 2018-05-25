@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\AAA\2_Develop\4_Server\wamp64\www\reading\2_android\reading\app\app.iml" filepath="C:\AAA\2_Develop\4_Server\wamp64\www\reading\2_android\reading\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/reading.iml" filepath="$PROJECT_DIR$/reading.iml" />
-      <module fileurl="file://C:\AAA\2_Develop\4_Server\wamp64\www\reading\2_android\reading\reading.iml" filepath="C:\AAA\2_Develop\4_Server\wamp64\www\reading\2_android\reading\reading.iml" />
     </modules>
   </component>
 </project>

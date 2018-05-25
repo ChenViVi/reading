@@ -76,13 +76,6 @@ public class LoginActivity extends Activity {
                 finish();
             }
         });
-        tvSign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,SignActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private StringRequest getLoginRequest(final String phone, final String password) {

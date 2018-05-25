@@ -10,6 +10,7 @@
     <string name="item_nav_type">分类</string>
     <string name="item_nav_discuss">讨论</string>
     <string name="item_nav_submit">我要投稿</string>
+    <string name="item_nav_manage">管理员</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -17,6 +18,7 @@
         <item>@string/item_nav_type</item>
         <item>@string/item_nav_discuss</item>
         <item>@string/item_nav_submit</item>
+        <item>@string/item_nav_manage</item>
     </string-array>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="loading_msg">请稍候...</string>

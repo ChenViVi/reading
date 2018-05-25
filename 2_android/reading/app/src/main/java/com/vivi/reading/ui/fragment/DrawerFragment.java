@@ -69,7 +69,7 @@ public class DrawerFragment extends Fragment implements OnClickListener{
     public static List<NavDrawerItem> getData() {
         List<NavDrawerItem> data = new ArrayList<>();
         // preparing navigation drawer items
-        int[] imgId = {R.drawable.ic_drawer_collect,R.drawable.ic_drawer_submit, R.drawable.ic_drawer_submit, R.drawable.ic_drawer_submit};
+        int[] imgId = {R.drawable.ic_drawer_collect,R.drawable.ic_drawer_catalog, R.drawable.ic_drawer_discuss, R.drawable.ic_drawer_submit,R.drawable.ic_drawer_setting};
         for (int i = 0; i < titles.length; i++) {
             NavDrawerItem navItem = new NavDrawerItem(titles[i],imgId[i]);
             data.add(navItem);
