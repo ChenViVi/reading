@@ -21,7 +21,7 @@ $arr['result'] = 0;
 while ($row =mysql_fetch_assoc($result)){
     $type_id = $row['type_id'];
     $uid = $row['uid'];
-    $r1 = mysql_query("select * from discuss_type where id = '$type_id'");
+    $r1 = mysql_query("select * from discuss_type where id = '$type_id' ORDER BY id DESC ");
     $r2 = mysql_query("select * from user where id = '$uid'");
     $row1 = mysql_fetch_assoc($r1);
     $row2 = mysql_fetch_assoc($r2);

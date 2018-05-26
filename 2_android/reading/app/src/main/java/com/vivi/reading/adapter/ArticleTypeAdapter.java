@@ -54,7 +54,7 @@ public class ArticleTypeAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_type,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_article_type,null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }

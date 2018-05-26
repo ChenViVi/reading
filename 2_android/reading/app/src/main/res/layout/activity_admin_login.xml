@@ -60,7 +60,8 @@
             android:padding="10dp"
             android:textColor="@color/textColorWhite"
             android:textColorHint="@color/textColorWhite"
-            android:background="@null"/>
+            android:background="@null"
+            android:text="admin"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -79,18 +80,4 @@
             android:textSize="15sp"
             />
     </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp">
-        <TextView
-            android:id="@+id/tv_sign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="注册"
-            android:textColor="@color/textColorWhite"
-            android:textSize="18sp"/>
-    </RelativeLayout>
 </LinearLayout>

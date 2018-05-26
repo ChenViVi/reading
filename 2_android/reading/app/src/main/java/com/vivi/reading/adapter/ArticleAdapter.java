@@ -34,9 +34,9 @@ public class ArticleAdapter extends BaseAdapter {
         TextView tvInfo;
         TextView tvDate;
         ViewHolder(View view){
-            tvTitle = (TextView) view.findViewById(R.id.tv_article_title);
-            tvInfo = (TextView) view.findViewById(R.id.tv_article_info);
-            tvDate = (TextView) view.findViewById(R.id.tv_article_date);
+            tvTitle = view.findViewById(R.id.tv_article_title);
+            tvInfo = view.findViewById(R.id.tv_article_info);
+            tvDate = view.findViewById(R.id.tv_article_date);
         }
     }
 

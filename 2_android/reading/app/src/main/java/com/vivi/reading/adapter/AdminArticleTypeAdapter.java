@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.vivi.reading.R;
-import com.vivi.reading.bean.Comment;
+import com.vivi.reading.bean.ArticleType;
 import com.vivi.reading.util.ConstUtils;
 
 import java.util.ArrayList;
@@ -27,30 +28,24 @@ import java.util.Map;
 /**
  * Created by vivi on 2016/6/2.
  */
-public class CommentAdapter extends BaseAdapter {
+public class AdminArticleTypeAdapter extends BaseAdapter{
 
-    private Context context;
-    private ArrayList<Comment> data;
     private RequestQueue queue;
+    private Context context;
+    private ArrayList<ArticleType> data;
 
-    public CommentAdapter(Context context,ArrayList<Comment> data,RequestQueue queue){
+    public AdminArticleTypeAdapter(Context context, ArrayList<ArticleType> data, RequestQueue queue){
         this.context = context;
         this.data = data;
         this.queue = queue;
     }
 
     class ViewHolder{
-        ImageView userImg;
         TextView tvName;
-        TextView tvDate;
-        TextView tvContent;
-        ImageView ivFavorite;
+        Button btnDelete;
         ViewHolder(View view){
-            userImg = view.findViewById(R.id.iv_user_img);
-            tvName = view.findViewById(R.id.tv_name);
-            tvDate = view.findViewById(R.id.tv_date);
-            tvContent = view.findViewById(R.id.tv_content);
-            ivFavorite = view.findViewById(R.id.iv_favorite);
+            tvName = view.findViewById(R.id.tvName);
+            btnDelete  = view.findViewById(R.id.btn_delete);
         }
     }
 
@@ -60,7 +55,7 @@ public class CommentAdapter extends BaseAdapter {
     }
 
     @Override
-    public Comment getItem(int position) {
+    public ArticleType getItem(int position) {
         return data.get(position);
     }
 
@@ -73,57 +68,44 @@ public class CommentAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null){
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_article_comment,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_admin_article_type,null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }
         else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Comment comment = getItem(position);
-        viewHolder.tvName.setText(comment.getName());
-        if (comment.getName() == null){
-            viewHolder.tvName.setText("读者");
-        }
-        else {
-            viewHolder.tvName.setText(comment.getName());
-        }
-        viewHolder.tvDate.setText(comment.getDate());
-        viewHolder.tvContent.setText(comment.getContent());
-        MyListener myListener = new MyListener(comment.getId());
-        viewHolder.ivFavorite.setOnClickListener(myListener);
+        ArticleType articleType = getItem(position);
+        viewHolder.tvName.setText(articleType.getName());
+        viewHolder.btnDelete.setOnClickListener(new MyListener(articleType.getId()));
         return convertView;
     }
 
     private class MyListener implements View.OnClickListener {
-        private int id;
-        private boolean clicked = false;
-        public MyListener(int id){
+        private String id;
+        public MyListener(String id){
             this.id = id;
         }
         @Override
         public void onClick(View v) {
-            if (!clicked){
-                queue.add(getSetCommentFavRequest(id,this));
-                ImageView imageView = (ImageView)v;
-                imageView.setImageResource(R.drawable.ic_favorite_focus);
-                imageView.setClickable(false);
-            }
-        }
-
-        public void setClicked(boolean clicked) {
-            this.clicked = clicked;
+            queue.add(delRequest(id));
         }
     }
 
-    private StringRequest getSetCommentFavRequest(final int commentId, final MyListener myListener) {
-        return new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "setcommentfav.php",
+    private StringRequest delRequest(final String id) {
+        return new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "delarticletype.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("commentFav","response="+response);
-                        Log.e("commentFav","id="+commentId);
-                        myListener.setClicked(true);
+                        int i = 0;
+                        for (ArticleType type :data){
+                            if (type.getId().equals(id)){
+                                data.remove(i);
+                                notifyDataSetChanged();
+                                break;
+                            }
+                            i++;
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -134,7 +116,7 @@ public class CommentAdapter extends BaseAdapter {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                map.put("commentId",String.valueOf(commentId));
+                map.put("typeId",id);
                 return map;
             }
         };
