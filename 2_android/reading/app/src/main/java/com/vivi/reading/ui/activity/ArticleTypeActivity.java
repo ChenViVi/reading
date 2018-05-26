@@ -64,15 +64,11 @@ public class ArticleTypeActivity extends Activity {
                 finish();
             }
         });
-
-        for (int i = 0; i < 10; i++){
-            data.add(new ArticleType(i, "name" + i));
-        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArticleType articleType = data.get(position);
-                Intent intent = new Intent(ArticleTypeActivity.this, TypeDetailActivity.class);
+                Intent intent = new Intent(ArticleTypeActivity.this, ArticleTypeDetailActivity.class);
                 intent.putExtra("id", articleType.getId());
                 intent.putExtra("name", articleType.getName());
                 startActivity(intent);

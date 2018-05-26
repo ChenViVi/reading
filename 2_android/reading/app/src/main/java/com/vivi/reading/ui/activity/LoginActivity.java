@@ -49,11 +49,11 @@ public class LoginActivity extends Activity {
         instance = this;
 
         queue = Volley.newRequestQueue(this);
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        tvSign = (TextView) findViewById(R.id.tv_sign);
-        editPhone = (EditText) findViewById(R.id.edit_phone);
-        editPassword = (EditText) findViewById(R.id.edit_password);
-        ivBack = (ImageView) findViewById(R.id.iv_back);
+        btnLogin = findViewById(R.id.btn_login);
+        tvSign = findViewById(R.id.tv_sign);
+        editPhone = findViewById(R.id.edit_phone);
+        editPassword = findViewById(R.id.edit_password);
+        ivBack = findViewById(R.id.iv_back);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +74,13 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        tvSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,SignActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -98,7 +105,6 @@ public class LoginActivity extends Activity {
                             editor.putInt("id",user.getId());
                             editor.putString("name",user.getName());
                             editor.putString("sex",user.getSex());
-                            editor.putString("imgUrl",user.getImgUrl());
                             editor.putString("sign",user.getSign());
                             editor.putBoolean("isLogin",true);
                             editor.apply();

@@ -33,7 +33,7 @@
         <activity android:name=".ui.activity.CollectActivity" />
         <activity android:name=".ui.activity.SubmitActivity" />
         <activity android:name=".ui.activity.EditActivity" />
-        <activity android:name=".ui.activity.TypeDetailActivity" />
+        <activity android:name=".ui.activity.ArticleTypeDetailActivity" />
         <activity android:name=".ui.activity.DiscussActivity" />
         <activity android:name=".ui.activity.DiscussDetailActivity" />
         <activity android:name=".ui.activity.AddDiscussActivity" />

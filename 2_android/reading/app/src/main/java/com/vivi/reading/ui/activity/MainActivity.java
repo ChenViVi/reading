@@ -24,13 +24,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.vivi.reading.R;
 import com.vivi.reading.bean.Action;
 import com.vivi.reading.bean.Article;
 import com.vivi.reading.ui.fragment.DrawerFragment;
 import com.vivi.reading.util.ConstUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvArticleAuthor;
     private ImageView ivFavorite;
     private ImageView ivComment;
+    private List<Article> items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,9 +124,27 @@ public class MainActivity extends AppCompatActivity {
                     y2 = event.getY();
                     if (Math.abs(y2 - y1) > 50){
                         if (y2 - y1 < 0) {
-                            queue.add(getArticleRequest(userId, --articleIdFlag));
+                            if (articleIdFlag == 0)
+                                Toast.makeText(MainActivity.this, "没有更多文章了", Toast.LENGTH_SHORT).show();
+                            else {
+                                article = items.get(--articleIdFlag);
+                                tvArticleTitle.setText(article.getTitle());
+                                tvArticleInfo1.setText(article.getInfo());
+                                tvArticleDate.setText(article.getDate());
+                                tvArticleAuthor.setText(article.getType());
+                                queue.add(getActionRequest(userId,article.getId()));
+                            }
                         } else if (y2 - y1 > 0) {
-                            queue.add(getArticleRequest(userId, ++articleIdFlag));
+                            if (articleIdFlag == items.size()-1)
+                                Toast.makeText(MainActivity.this, "没有更多文章了", Toast.LENGTH_SHORT).show();
+                            else {
+                                article = items.get(++articleIdFlag);
+                                tvArticleTitle.setText(article.getTitle());
+                                tvArticleInfo1.setText(article.getInfo());
+                                tvArticleDate.setText(article.getDate());
+                                tvArticleAuthor.setText(article.getType());
+                                queue.add(getActionRequest(userId,article.getId()));
+                            }
                         }
                     }
                     else if (article != null) {
@@ -184,65 +208,36 @@ public class MainActivity extends AppCompatActivity {
         queue.add(getActionRequest(userId,articleIdFlag));
     }
 
-    private StringRequest getArticleRequest(final int userId, final int articleId) {
-        StringRequest request = new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "getarticle.php",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("response","response="+response);
-                        Gson gson = new Gson();
-                        article = gson.fromJson(response, Article.class);
-                        if (article.getResult() == 2) {
-                            Toast.makeText(MainActivity.this, "没有更多文章了", Toast.LENGTH_SHORT).show();
-                        } else if (article.getResult() == 1) {
-                            //Toast.makeText(MainActivity.this, "网络连接失败1", Toast.LENGTH_SHORT).show();
-                        } else if (article.getResult() == 0) {
-                            articleIdFlag = article.getId();
-                            tvArticleTitle.setText(article.getTitle());
-                            tvArticleInfo1.setText(article.getInfo());
-                            tvArticleDate.setText(article.getDate());
-                            tvArticleAuthor.setText(article.getType());
-                            queue.add(getActionRequest(userId,articleIdFlag));
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "网络连接超时", Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<>();
-                map.put("userId",String.valueOf(userId));
-                map.put("articleId",String.valueOf(articleId));
-                Log.e("response","userId="+userId);
-                Log.e("response","articleId="+articleId);
-                return map;
-            }
-        };
-        request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        return request;
-    }
-
     private StringRequest getArticleRequest() {
         StringRequest request = new StringRequest(Request.Method.GET, ConstUtils.BASEURL + "getarticle.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Gson gson = new Gson();
-                        article = gson.fromJson(response, Article.class);
-                        if (article.getResult() == 2) {
-                            Toast.makeText(MainActivity.this, "没有更多文章了", Toast.LENGTH_SHORT).show();
-                        } else if (article.getResult() == 1) {
-                            Toast.makeText(MainActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
-                        } else if (article.getResult() == 0) {
-                            articleIdFlag = article.getId();
-                            tvArticleTitle.setText(article.getTitle());
-                            tvArticleInfo1.setText(article.getInfo());
-                            tvArticleDate.setText(article.getDate());
-                            tvArticleAuthor.setText(article.getType());
-                            queue.add(getActionRequest(userId,articleIdFlag));
+                        int result = 0;
+                        String list = "";
+                        try {
+                            JSONObject json= new JSONObject(response);
+                            result = json.getInt("result");
+                            list = json.getJSONArray("list").toString();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (result != 0){
+                            Toast.makeText(MainActivity.this, "获取文章失败", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Gson gson = new Gson();
+                            items = gson.fromJson(list, new TypeToken<List<Article>>() {}.getType());
+                            if (items.size() == 0)
+                                Toast.makeText(MainActivity.this, "没有任何文章", Toast.LENGTH_SHORT).show();
+                            else {
+                                article = items.get(0);
+                                tvArticleTitle.setText(article.getTitle());
+                                tvArticleInfo1.setText(article.getInfo());
+                                tvArticleDate.setText(article.getDate());
+                                tvArticleAuthor.setText(article.getType());
+                                queue.add(getActionRequest(userId,article.getId()));
+                            }
                         }
                     }
                 }, new Response.ErrorListener() {

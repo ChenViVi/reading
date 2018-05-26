@@ -35,8 +35,6 @@ public class ShareDialog extends Dialog
 {
 	private ImageView img_QQ;
 	private ImageView img_Qzone;
-	private ImageView img_Wx;
-	private ImageView img_Friends;
 	private Button btnCancel;
 
 	private String share_appname;
@@ -68,8 +66,6 @@ public class ShareDialog extends Dialog
 
 		img_QQ = (ImageView) findViewById(R.id.iv_share_qq);
 		img_Qzone = (ImageView) findViewById(R.id.iv_share_qzone);
-		img_Wx = (ImageView) findViewById(R.id.iv_share_weixin);
-		img_Friends = (ImageView) findViewById(R.id.iv_share_frends);
 		btnCancel = (Button) findViewById(R.id.btn_cancel);
 
 		api = WXAPIFactory.createWXAPI(context, "wxaf610c1b8e5d1798", true);
@@ -128,34 +124,6 @@ public class ShareDialog extends Dialog
 						mTencent.shareToQzone(context, params, qqShareListener);
 					}
 						break;
-					case R.id.iv_share_weixin:
-						/*if (isWeixinAvilible(context))
-						{
-							//req.scene = SendMessageToWX.Req.WXSceneSession;
-							//api.sendReq(req);
-							share2weixin(0);
-						}
-						else
-						{
-							Toast.makeText(context, "该手机未安装微信", Toast.LENGTH_SHORT).show();
-						}*/
-						share2weixin();
-						Log.e("share","share_weixin");
-						break;
-					case R.id.iv_share_frends:
-						/*if (isWeixinAvilible(context))
-						{
-							//req.scene = SendMessageToWX.Req.WXSceneTimeline;
-							//api.sendReq(req);
-							share2weixin(1);
-						}
-						else
-						{
-							Toast.makeText(context, "该手机未安装微信", Toast.LENGTH_SHORT).show();
-						}*/
-						share2weixinFriends();
-						Log.e("share","share_firends");
-						break;
 				}
 
 				ShareDialog.this.dismiss();
@@ -164,8 +132,6 @@ public class ShareDialog extends Dialog
 
 		img_QQ.setOnClickListener(listener);
 		img_Qzone.setOnClickListener(listener);
-		img_Wx.setOnClickListener(listener);
-		img_Friends.setOnClickListener(listener);
 		btnCancel.setOnClickListener(listener);
 	}
 

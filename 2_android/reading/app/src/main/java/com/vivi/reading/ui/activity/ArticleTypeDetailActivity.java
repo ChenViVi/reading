@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TypeDetailActivity extends Activity {
+public class ArticleTypeDetailActivity extends Activity {
 
     private RequestQueue queue;
 
@@ -70,7 +70,7 @@ public class TypeDetailActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Article article = data.get(position);
-                Intent intent = new Intent(TypeDetailActivity.this,ArticleDetailActivity.class);
+                Intent intent = new Intent(ArticleTypeDetailActivity.this,ArticleDetailActivity.class);
                 intent.putExtra("articleId",article.getId());
                 intent.putExtra("title",article.getTitle());
                 intent.putExtra("date",article.getDate());
@@ -97,7 +97,7 @@ public class TypeDetailActivity extends Activity {
                             e.printStackTrace();
                         }
                         if (result != 0){
-                            Toast.makeText(TypeDetailActivity.this, "获取文章失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ArticleTypeDetailActivity.this, "获取文章失败", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Gson gson = new Gson();
@@ -112,7 +112,7 @@ public class TypeDetailActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(TypeDetailActivity.this, "网络连接超时", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ArticleTypeDetailActivity.this, "网络连接超时", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
