@@ -18,14 +18,12 @@ import java.util.ArrayList;
  */
 public class ArticleTypeAdapter extends BaseAdapter {
 
-    private RequestQueue queue;
     private Context context;
     private ArrayList<ArticleType> data;
 
-    public ArticleTypeAdapter(Context context, ArrayList<ArticleType> data, RequestQueue queue){
+    public ArticleTypeAdapter(Context context, ArrayList<ArticleType> data){
         this.context = context;
         this.data = data;
-        this.queue = queue;
     }
 
     class ViewHolder{

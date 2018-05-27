@@ -50,10 +50,10 @@ public class ArticleTypeActivity extends Activity {
         queue = Volley.newRequestQueue(this);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        listView = (ListView) findViewById(R.id.list_view);
-        ivBack = (ImageView) findViewById(R.id.iv_back);
+        listView = findViewById(R.id.list_view);
+        ivBack = findViewById(R.id.iv_back);
 
-        adapter = new ArticleTypeAdapter(this,data,queue);
+        adapter = new ArticleTypeAdapter(this,data);
 
         listView.setAdapter(adapter);
         queue.add(getArticleType());

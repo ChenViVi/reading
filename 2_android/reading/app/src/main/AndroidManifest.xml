@@ -29,7 +29,7 @@
         <activity android:name=".ui.activity.ArticleTypeActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.SignActivity" />
-        <activity android:name=".ui.activity.UserActivity"></activity>
+        <activity android:name=".ui.activity.UserActivity"/>
         <activity android:name=".ui.activity.CollectActivity" />
         <activity android:name=".ui.activity.SubmitActivity" />
         <activity android:name=".ui.activity.EditActivity" />
@@ -40,6 +40,7 @@
         <activity android:name=".ui.activity.AdminLoginActivity" />
         <activity android:name=".ui.activity.AdminActivity" />
         <activity android:name=".ui.activity.AdminArticleTypeActivity" />
+        <activity android:name=".ui.activity.AdminArticleTypeAddActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"

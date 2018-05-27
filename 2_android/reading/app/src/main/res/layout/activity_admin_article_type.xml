@@ -32,7 +32,7 @@
                 android:text="分类"
                 android:textSize="20sp"/>
             <TextView
-                android:id="@+id/tv_send"
+                android:id="@+id/tv_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="添加"

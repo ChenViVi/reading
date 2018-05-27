@@ -71,6 +71,18 @@ public class AdminArticleTypeActivity extends Activity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.tv_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminArticleTypeActivity.this, AdminArticleTypeAddActivity.class));
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        queue.add(getArticleType());
     }
 
     private StringRequest getArticleType() {
@@ -96,9 +108,6 @@ public class AdminArticleTypeActivity extends Activity {
                             data.clear();
                             if (items != null){
                                 data.addAll(items);
-                                for (ArticleType type : items){
-                                    Log.e("fick",""+type.getId());
-                                }
                             }
                             adapter.notifyDataSetChanged();
 
