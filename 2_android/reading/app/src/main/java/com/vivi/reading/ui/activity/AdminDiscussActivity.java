@@ -75,7 +75,10 @@ public class AdminDiscussActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Discuss discuss = data.get(position);
-                Intent intent = new Intent(AdminDiscussActivity.this,ArticleDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("discuss",discuss);
+                Intent intent = new Intent(AdminDiscussActivity.this,AdminDiscussDetailActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

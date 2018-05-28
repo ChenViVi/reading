@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivi.reading.R;
+import com.vivi.reading.adapter.AdminDiscussCommentAdapter;
 import com.vivi.reading.adapter.DiscussCommentAdapter;
 import com.vivi.reading.bean.Discuss;
 import com.vivi.reading.bean.DiscussComment;
@@ -48,7 +49,7 @@ public class AdminDiscussDetailActivity extends AppCompatActivity {
     private SharedPreferences preferences;
 
     private int userId;
-    private DiscussCommentAdapter adapter;
+    private AdminDiscussCommentAdapter adapter;
     private ArrayList<DiscussComment> data = new ArrayList<>();
 
     private ListView listView;
@@ -58,15 +59,13 @@ public class AdminDiscussDetailActivity extends AppCompatActivity {
     private TextView tvContent;
     private TextView tvTitle;
     private ImageView ivBack;
-    private EditText editComment;
-    private TextView tvComment;
-    private RelativeLayout layoutCommnet;
+    private TextView tvDelete;
     private Discuss discuss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_discuss_detail);
+        setContentView(R.layout.activity_admin_discuss_detail);
 
         queue = Volley.newRequestQueue(this);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -75,16 +74,14 @@ public class AdminDiscussDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         discuss = (Discuss) intent.getSerializableExtra("discuss");
 
-        View layout = getLayoutInflater().inflate(R.layout.header_discuss_detail,null);
+        View layout = getLayoutInflater().inflate(R.layout.header_admin_discuss_detail,null);
         tvDiscussTitle = layout.findViewById(R.id.tv_article_title);
         tvDate = layout.findViewById(R.id.tv_article_date);
         tvAuthor = layout.findViewById(R.id.tv_action_author);
         tvContent = layout.findViewById(R.id.tv_article_content);
         tvTitle = layout.findViewById(R.id.tv_title);
         ivBack = layout.findViewById(R.id.iv_back);
-        editComment = findViewById(R.id.edit_comment);
-        tvComment = findViewById(R.id.tv_comment);
-        layoutCommnet = findViewById(R.id.layout_comment);
+        tvDelete = layout.findViewById(R.id.tv_delete);
         listView = findViewById(R.id.list_view);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
@@ -93,59 +90,24 @@ public class AdminDiscussDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        queue.add(getCommentRequest(discuss.getId()));
-        adapter = new DiscussCommentAdapter(this,data);
-
-        tvComment.setOnClickListener(new View.OnClickListener() {
+        tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String content = editComment.getText().toString();
-                if (userId == -1){
-                    Intent intent1 = new Intent(AdminDiscussDetailActivity.this,LoginActivity.class);
-                    startActivity(intent1);
-                }
-                else if (content.equals("")){
-                    Toast.makeText(AdminDiscussDetailActivity.this, "评论不能为空", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    queue.add(getSetCommentRequest(userId,discuss.getId(),content));
-                    onFocusChange(false);
-                }
+            public void onClick(View view) {
+                queue.add(delRequest());
             }
         });
+
+        queue.add(getCommentRequest(discuss.getId()));
+        adapter = new AdminDiscussCommentAdapter(this,data, queue);
+
+
         listView.addHeaderView(layout);
         listView.setAdapter(adapter);
-        if (intent.getBooleanExtra("comment",false)){
-            //onFocusChange(true);
-            layoutCommnet.setFocusableInTouchMode(false);
-            listView.setStackFromBottom(true);
-            listView.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
-        }
         tvDiscussTitle.setText(discuss.getTitle());
         tvTitle.setText(discuss.getTitle());
         tvDate.setText(discuss.getDate());
         tvAuthor.setText(discuss.getUser());
         tvContent.setText(discuss.getContent());
-    }
-
-    public void onFocusChange(final boolean hasFocus){
-        (new Handler()).postDelayed(new Runnable() {
-            public void run() {
-                InputMethodManager imm = (InputMethodManager) editComment.getContext().getSystemService(INPUT_METHOD_SERVICE);
-                if (hasFocus) {
-                    //显示输入法
-                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                    editComment.setFocusable(true);
-                    editComment.setFocusableInTouchMode(true);
-                    editComment.requestFocus();
-                } else {
-                    editComment.setText("");
-                    //隐藏输入法
-                    imm.hideSoftInputFromWindow(editComment.getWindowToken(),0);
-                }
-            }
-        }, 100);
     }
 
     private StringRequest getCommentRequest(final int id) {
@@ -195,12 +157,25 @@ public class AdminDiscussDetailActivity extends AppCompatActivity {
         return request;
     }
 
-    private StringRequest getSetCommentRequest(final int userId,final int discussId,final String content) {
-        StringRequest request = new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "adddiscusscomment.php",
+    private StringRequest delRequest() {
+        return new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "deldiscuss.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        queue.add(getCommentRequest(discussId));
+                        int result = 0;
+                        try {
+                            JSONObject json= new JSONObject(response);
+                            result = json.getInt("result");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (result != 0){
+                            Toast.makeText(AdminDiscussDetailActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(AdminDiscussDetailActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -211,13 +186,9 @@ public class AdminDiscussDetailActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                map.put("userId",String.valueOf(userId));
-                map.put("discussId",String.valueOf(discussId));
-                map.put("content",content);
+                map.put("discussId",String.valueOf(discuss.getId()));
                 return map;
             }
         };
-        request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        return request;
     }
 }
