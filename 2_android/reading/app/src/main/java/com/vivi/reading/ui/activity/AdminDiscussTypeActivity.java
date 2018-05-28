@@ -75,7 +75,7 @@ public class AdminDiscussTypeActivity extends Activity {
         findViewById(R.id.tv_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminDiscussTypeActivity.this, AdminArticleTypeAddActivity.class));
+                startActivity(new Intent(AdminDiscussTypeActivity.this, AdminDiscussTypeAddActivity.class));
             }
         });
     }
