@@ -5,10 +5,10 @@ package com.vivi.reading.bean;
  */
 
 public class ArticleType {
-    private String id;
+    private int id;
     private String name;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -16,7 +16,7 @@ public class ArticleType {
         return name;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

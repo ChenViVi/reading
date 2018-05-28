@@ -6,10 +6,10 @@ mysql_query("set names 'utf8'",$link);
 mysql_select_db($DBNAME);
 mysql_set_charset('utf8');
 
-$typeId = $_POST['typeId'];
+$commentId = $_POST['commentId'];
 
-mysql_query("delete from article_type where id = '$typeId'");
-mysql_query("delete from article where type_id = '$typeId'");
+$sql1 = "delete from comment where id = '$commentId'";
+$r = mysql_query($sql1);
 $arr = array(
     'result' => 0
 );

@@ -6,10 +6,13 @@ mysql_query("set names 'utf8'",$link);
 mysql_select_db($DBNAME);
 mysql_set_charset('utf8');
 
-$typeId = $_POST['typeId'];
+$articleId = $_POST['articleId'];
+$type_id = $_POST['typeId'];
+$title = $_POST['title'];
+$info = $_POST['info'];
+$content = $_POST['content'];
 
-mysql_query("delete from article_type where id = '$typeId'");
-mysql_query("delete from article where type_id = '$typeId'");
+$r = mysql_query("update article set type_id = '{$type_id}',title = '{$title}',info = '{$info}',content = '{$content}' where id = '{$articleId}'");
 $arr = array(
     'result' => 0
 );

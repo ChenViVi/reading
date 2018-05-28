@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivi.reading.R;
+import com.vivi.reading.adapter.AdminArticleAdapter;
 import com.vivi.reading.adapter.ArticleAdapter;
 import com.vivi.reading.bean.Article;
 import com.vivi.reading.util.ConstUtils;
@@ -33,21 +34,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ArticleTypeDetailActivity extends Activity {
+public class AdminArticleActivity extends Activity {
 
     private RequestQueue queue;
 
     private ArrayList<Article> data = new ArrayList<>();
-    private ArticleAdapter adapter;
+    private AdminArticleAdapter adapter;
 
     private ListView listView;
     private ImageView ivBack;
     private TextView tvTitle;
 
+    private int typeId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_type_detail);
+        setContentView(R.layout.activity_admin_article);
 
         queue = Volley.newRequestQueue(this);
 
@@ -56,10 +59,11 @@ public class ArticleTypeDetailActivity extends Activity {
         tvTitle = findViewById(R.id.tv_title);
         tvTitle.setText(getIntent().getStringExtra("name"));
 
-        adapter = new ArticleAdapter(this,data,queue);
+        adapter = new AdminArticleAdapter(this,data,queue);
 
         listView.setAdapter(adapter);
-        queue.add(getArticle(getIntent().getIntExtra("id", 0)));
+        typeId = getIntent().getIntExtra("id",0);
+        queue.add(getArticle(typeId));
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +74,7 @@ public class ArticleTypeDetailActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Article article = data.get(position);
-                Intent intent = new Intent(ArticleTypeDetailActivity.this,ArticleDetailActivity.class);
+                Intent intent = new Intent(AdminArticleActivity.this,ArticleDetailActivity.class);
                 intent.putExtra("articleId",article.getId());
                 intent.putExtra("title",article.getTitle());
                 intent.putExtra("date",article.getDate());
@@ -79,9 +83,23 @@ public class ArticleTypeDetailActivity extends Activity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.tv_add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AdminArticleActivity.this, AdminArticleAddActivity.class);
+                intent.putExtra("typeId", typeId);
+                startActivity(intent);
+            }
+        });
     }
 
-    private StringRequest getArticle(final int typeId) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        queue.add(getArticle(typeId));
+    }
+
+    private StringRequest getArticle(final int id) {
         StringRequest request = new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "getarticlebytype.php",
                 new Response.Listener<String>() {
                     @Override
@@ -96,7 +114,7 @@ public class ArticleTypeDetailActivity extends Activity {
                             e.printStackTrace();
                         }
                         if (result != 0){
-                            Toast.makeText(ArticleTypeDetailActivity.this, "获取文章失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminArticleActivity.this, "获取文章失败", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Gson gson = new Gson();
@@ -111,13 +129,13 @@ public class ArticleTypeDetailActivity extends Activity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ArticleTypeDetailActivity.this, "网络连接超时", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminArticleActivity.this, "网络连接超时", Toast.LENGTH_SHORT).show();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                map.put("typeId",String.valueOf(typeId));
+                map.put("typeId",String.valueOf(id));
                 return map;
             }
         };

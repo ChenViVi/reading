@@ -19,7 +19,6 @@ public class AdminActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         findViewById(R.id.tv_article_type).setOnClickListener(this);
-        findViewById(R.id.tv_article).setOnClickListener(this);
         findViewById(R.id.tv_discuss).setOnClickListener(this);
         findViewById(R.id.tv_discuss_type).setOnClickListener(this);
         findViewById(R.id.tv_user).setOnClickListener(this);

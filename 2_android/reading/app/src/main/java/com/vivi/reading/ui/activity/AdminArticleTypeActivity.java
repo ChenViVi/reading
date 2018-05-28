@@ -65,7 +65,7 @@ public class AdminArticleTypeActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArticleType articleType = data.get(position);
-                Intent intent = new Intent(AdminArticleTypeActivity.this, ArticleTypeDetailActivity.class);
+                Intent intent = new Intent(AdminArticleTypeActivity.this, AdminArticleActivity.class);
                 intent.putExtra("id", articleType.getId());
                 intent.putExtra("name", articleType.getName());
                 startActivity(intent);

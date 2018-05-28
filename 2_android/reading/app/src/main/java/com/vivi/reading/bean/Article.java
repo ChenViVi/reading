@@ -1,23 +1,27 @@
 package com.vivi.reading.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by vivi on 2016/6/3.
  */
-public class Article {
+public class Article implements Serializable{
     private int id;
+    private int typrId;
     private String title;
     private String info;
-
     private String type;
     private String date;
 
     private String content;
-    private int result;
 
     public int getId() {
         return id;
     }
 
+    public int getTyprId() {
+        return typrId;
+    }
 
     public String getType() {
         return type;
@@ -37,9 +41,5 @@ public class Article {
 
     public String getTitle() {
         return title;
-    }
-
-    public int getResult() {
-        return result;
     }
 }

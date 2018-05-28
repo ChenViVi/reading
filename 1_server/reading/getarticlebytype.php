@@ -25,6 +25,7 @@ while ($row =mysql_fetch_assoc($result)){
     $row2 = mysql_fetch_assoc($r1);
     $arrTemp = array(
         'id' => $row['id'],
+        'typeId' => $row['type_id'],
         'title' => $row['title'],
         'type' => $row2['name'],
         'info' => $row['info'],

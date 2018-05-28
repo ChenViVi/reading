@@ -9,11 +9,9 @@ mysql_set_charset('utf8');
 $type_id = $_POST['typeId'];
 $title = $_POST['title'];
 $info = $_POST['info'];
-$author = $_POST['author'];
-$date = $_POST['date'];
 $content = $_POST['content'];
 
-$sql1 = "insert into article(type_id,title,info,author,date,content) values('{$type_id}','{$title}','{$info}','{$author}','{$date}','{$content}')";
+$sql1 = "insert into article(type_id,title,info,content) values('{$type_id}','{$title}','{$info}','{$content}')";
 $r = mysql_query($sql1);
 $arr = array(
     'result' => 0
