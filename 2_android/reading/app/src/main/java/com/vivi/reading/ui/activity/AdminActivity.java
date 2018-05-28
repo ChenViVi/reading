@@ -30,6 +30,9 @@ public class AdminActivity extends Activity implements View.OnClickListener{
             case R.id.tv_article_type:
                 startActivity(new Intent(AdminActivity.this, AdminArticleTypeActivity.class));
                 break;
+            case R.id.tv_discuss_type:
+                startActivity(new Intent(AdminActivity.this, AdminDiscussTypeActivity.class));
+                break;
         }
     }
 }

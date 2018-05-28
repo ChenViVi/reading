@@ -45,6 +45,7 @@
         <activity android:name=".ui.activity.AdminArticleAddActivity" />
         <activity android:name=".ui.activity.AdminArticleDetailActivity" />
         <activity android:name=".ui.activity.AdminArticleUpdateActivity" />
+        <activity android:name=".ui.activity.AdminDiscussTypeActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
