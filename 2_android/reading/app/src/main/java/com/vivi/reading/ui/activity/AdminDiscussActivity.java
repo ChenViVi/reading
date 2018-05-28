@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,41 +21,50 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivi.reading.R;
-import com.vivi.reading.adapter.AdminDiscussTypeAdapter;
-import com.vivi.reading.bean.DiscussType;
+import com.vivi.reading.adapter.AdminArticleAdapter;
+import com.vivi.reading.adapter.DiscussAdapter;
+import com.vivi.reading.bean.Article;
+import com.vivi.reading.bean.Discuss;
 import com.vivi.reading.util.ConstUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class AdminDiscussTypeActivity extends Activity {
+public class AdminDiscussActivity extends Activity {
 
     private RequestQueue queue;
 
-    private ArrayList<DiscussType> data = new ArrayList<>();
-    private AdminDiscussTypeAdapter adapter;
+    private ArrayList<Discuss> data = new ArrayList<>();
+    private DiscussAdapter adapter;
 
     private ListView listView;
     private ImageView ivBack;
+    private TextView tvTitle;
+
+    private int typeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_discuss_type);
+        setContentView(R.layout.activity_admin_discuss);
 
         queue = Volley.newRequestQueue(this);
 
         listView = findViewById(R.id.list_view);
         ivBack = findViewById(R.id.iv_back);
+        tvTitle = findViewById(R.id.tv_title);
+        tvTitle.setText(getIntent().getStringExtra("name"));
 
-        adapter = new AdminDiscussTypeAdapter(this, data, queue);
+        adapter = new DiscussAdapter(this,data);
 
         listView.setAdapter(adapter);
-        queue.add(getDiscussType());
-
+        typeId = getIntent().getIntExtra("id",0);
+        queue.add(getDiscussRequest(typeId));
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,17 +74,9 @@ public class AdminDiscussTypeActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DiscussType discussType = data.get(position);
-                Intent intent = new Intent(AdminDiscussTypeActivity.this, AdminDiscussActivity.class);
-                intent.putExtra("id", discussType.getId());
-                intent.putExtra("name", discussType.getName());
+                Discuss discuss = data.get(position);
+                Intent intent = new Intent(AdminDiscussActivity.this,ArticleDetailActivity.class);
                 startActivity(intent);
-            }
-        });
-        findViewById(R.id.tv_add).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AdminDiscussTypeActivity.this, AdminDiscussTypeAddActivity.class));
             }
         });
     }
@@ -81,11 +84,11 @@ public class AdminDiscussTypeActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        queue.add(getDiscussType());
+        queue.add(getDiscussRequest(typeId));
     }
 
-    private StringRequest getDiscussType() {
-        StringRequest request = new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "getdiscusstype.php",
+    private StringRequest getDiscussRequest(final int id) {
+        StringRequest request = new StringRequest(Request.Method.POST, ConstUtils.BASEURL + "getdiscussbytype.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -99,25 +102,31 @@ public class AdminDiscussTypeActivity extends Activity {
                             e.printStackTrace();
                         }
                         if (result != 0){
-                            Toast.makeText(AdminDiscussTypeActivity.this, "获取讨论区分类失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AdminDiscussActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             Gson gson = new Gson();
-                            List<DiscussType> items = gson.fromJson(list, new TypeToken<List<DiscussType>>() {}.getType());
+                            List<Discuss> items = gson.fromJson(list, new TypeToken<List<Discuss>>() {}.getType());
                             data.clear();
                             if (items != null){
                                 data.addAll(items);
                             }
                             adapter.notifyDataSetChanged();
-
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(AdminDiscussTypeActivity.this, "网络连接超时", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AdminDiscussActivity.this, "网络连接超时", Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put("typeId",String.valueOf(id));
+                return map;
+            }
+        };
         request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         return request;
     }

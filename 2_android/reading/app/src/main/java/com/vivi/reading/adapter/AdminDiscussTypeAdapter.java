@@ -19,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.vivi.reading.R;
 import com.vivi.reading.bean.DiscussType;
 import com.vivi.reading.ui.activity.AdminArticleActivity;
+import com.vivi.reading.ui.activity.AdminDiscussActivity;
 import com.vivi.reading.util.ConstUtils;
 
 import java.util.ArrayList;
@@ -130,7 +131,7 @@ public class AdminDiscussTypeAdapter extends BaseAdapter{
         }
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, AdminArticleActivity.class);
+            Intent intent = new Intent(context, AdminDiscussActivity.class);
             intent.putExtra("id", discussType.getId());
             intent.putExtra("name", discussType.getName());
             context.startActivity(intent);
