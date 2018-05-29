@@ -60,8 +60,7 @@
             android:padding="10dp"
             android:textColor="@color/textColorWhite"
             android:textColorHint="@color/textColorWhite"
-            android:background="@null"
-            android:text="admin"/>
+            android:background="@null" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
