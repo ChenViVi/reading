@@ -5,18 +5,18 @@ package com.vivi.reading.bean;
  */
 public class User {
     private int id;
+    private int seal;
     private String name;
     private String sex;
-    private String imgUrl;
     private String sign;
     private int result;
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
     public int getId() {
         return id;
+    }
+
+    public int getSeal() {
+        return seal;
     }
 
     public String getName() {

@@ -17,16 +17,18 @@ $sql1 = "select * from user where ((name = '$username' and password = '$password
 $r1 = mysql_query($sql1);
 
 
-if (r1 == true){
+if ($r1 == true){
     if(mysql_num_rows($r1)){
         $row = mysql_fetch_assoc($r1);
-        $result = 0;
-        $id = $row['id'];
-        $name = $row['name'];
-        $sex = $row['sex'];
-        $imgUrl = $row['imgUrl'];
-        $sign = $row['sign'];
-
+        $seal = $row['seal'];
+        if ($seal == 1) $result = 3;
+        else{
+            $result = 0;
+            $id = $row['id'];
+            $name = $row['name'];
+            $sex = $row['sex'];
+            $sign = $row['sign'];
+        }
     }else{
         $result = 2;//0 OK ,1 NG
     }
@@ -38,9 +40,9 @@ if (r1 == true){
 $arr = array(
     'result' => $result,
     'id' => $id,
+    'seal' => $seal,
     'name' => $name,
     'sex' => $sex,
-    'imgUrl' => $imgUrl,
     'sign' => $sign,
 );
 $strr = json_encode($arr);

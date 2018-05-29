@@ -19,7 +19,6 @@ public class AdminActivity extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
         findViewById(R.id.tv_article_type).setOnClickListener(this);
-        findViewById(R.id.tv_discuss).setOnClickListener(this);
         findViewById(R.id.tv_discuss_type).setOnClickListener(this);
         findViewById(R.id.tv_user).setOnClickListener(this);
     }
@@ -32,6 +31,9 @@ public class AdminActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.tv_discuss_type:
                 startActivity(new Intent(AdminActivity.this, AdminDiscussTypeActivity.class));
+                break;
+            case R.id.tv_user:
+                startActivity(new Intent(AdminActivity.this, AdminUserActivity.class));
                 break;
         }
     }

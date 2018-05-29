@@ -96,11 +96,13 @@ public class LoginActivity extends Activity {
                         if (user.getResult() == 2){
                             Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
                         }
+                        else if (user.getResult() == 3){
+                            Toast.makeText(LoginActivity.this, "你的账号被封，请联系管理员", Toast.LENGTH_SHORT).show();
+                        }
                         else if (user.getResult() == 1){
                             Toast.makeText(LoginActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                         }
                         else if(user.getResult() == 0){
-                            Log.e("userId","1"+String.valueOf(user.getId()));
                             editor = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this).edit();
                             editor.putInt("id",user.getId());
                             editor.putString("name",user.getName());

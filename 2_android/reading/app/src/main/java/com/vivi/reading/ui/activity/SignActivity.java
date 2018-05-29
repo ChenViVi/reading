@@ -99,7 +99,6 @@ public class SignActivity extends Activity {
                             editor.putInt("id", user.getId());
                             editor.putString("name", user.getName());
                             editor.putString("sex", user.getSex());
-                            editor.putString("imgUrl", user.getImgUrl());
                             editor.putString("sign", user.getSign());
                             editor.putBoolean("isLogin", true);
                             editor.apply();
