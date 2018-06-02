@@ -214,7 +214,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                             editor = PreferenceManager.getDefaultSharedPreferences(UserActivity.this).edit();
                             editor.putString("name", name);
                             editor.putString("sex", sex);
-                            editor.putString("imgUrl", response);
                             editor.putString("sign", sign);
                             editor.apply();
                         }
