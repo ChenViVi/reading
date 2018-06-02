@@ -65,8 +65,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvUserNameChange;
     private LinearLayout layoutUserSign;
     private TextView tvUserSign;
-    private TextView tvSave;
     private ImageView ivMale;
+    private TextView tvSave;
     private ImageView ivFamale;
 
     @Override
@@ -200,7 +200,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("editactivity", response);
                         int result = 0;
                         try {
                             JSONObject json= new JSONObject(response);
@@ -209,7 +208,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                             e.printStackTrace();
                         }
                         if (result != 0){
-                            Toast.makeText(UserActivity.this, "获取文章失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserActivity.this, "修改信息失败", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             editor = PreferenceManager.getDefaultSharedPreferences(UserActivity.this).edit();
@@ -219,17 +218,6 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                             editor.putString("sign", sign);
                             editor.apply();
                         }
-                        /*if (response.equals("EDIT_FAILED")) {
-                            Toast.makeText(UserActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
-                        } else {
-                            editor = PreferenceManager.getDefaultSharedPreferences(UserActivity.this).edit();
-                            editor.putString("name", name);
-                            editor.putString("sex", sex);
-                            editor.putString("imgUrl", response);
-                            editor.putString("sign", sign);
-                            editor.apply();
-                            finish();
-                        }*/
                     }
                 }, new Response.ErrorListener() {
             @Override
