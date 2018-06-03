@@ -8,8 +8,14 @@ mysql_set_charset('utf8');
 
 $typeId = $_POST['typeId'];
 
+$result = mysql_query("select * from article where type_id = '$typeId'");
+while ($row =mysql_fetch_assoc($result)){
+    $articleId = $row['id'];
+    mysql_query("delete from commnet where articleId = '$articleId'");
+    mysql_query("delete from article where id = '$articleId'");
+}
 mysql_query("delete from article_type where id = '$typeId'");
-mysql_query("delete from article where type_id = '$typeId'");
+
 $arr = array(
     'result' => 0
 );

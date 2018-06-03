@@ -29,7 +29,7 @@ public class ArticleTypeAdapter extends BaseAdapter {
     class ViewHolder{
         TextView tvName;
         ViewHolder(View view){
-            tvName = (TextView) view.findViewById(R.id.tvName);
+            tvName = view.findViewById(R.id.tvName);
         }
     }
 

@@ -78,17 +78,17 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         queue = Volley.newRequestQueue(this);
 
-        ivBack = (ImageView) findViewById(R.id.iv_back);
-        nivUserImg = (ImageView) findViewById(R.id.niv_user_img);
-        tvUserName = (TextView) findViewById(R.id.tv_user_name);
+        ivBack = findViewById(R.id.iv_back);
+        nivUserImg = findViewById(R.id.niv_user_img);
+        tvUserName = findViewById(R.id.tv_user_name);
         //switcher = (Switch) findViewById(R.id.switch_user_sex);
-        layoutUserName = (LinearLayout) findViewById(R.id.layout_user_name);
-        layoutUserSign = (LinearLayout) findViewById(R.id.layout_user_sign);
-        tvUserNameChange = (TextView) findViewById(R.id.tv_user_name_change);
-        tvUserSign = (TextView) findViewById(R.id.tv_user_sign);
-        tvSave = (TextView) findViewById(R.id.tv_save);
-        ivMale = (ImageView) findViewById(R.id.iv_male);
-        ivFamale = (ImageView) findViewById(R.id.iv_female);
+        layoutUserName = findViewById(R.id.layout_user_name);
+        layoutUserSign = findViewById(R.id.layout_user_sign);
+        tvUserNameChange = findViewById(R.id.tv_user_name_change);
+        tvUserSign = findViewById(R.id.tv_user_sign);
+        tvSave = findViewById(R.id.tv_save);
+        ivMale = findViewById(R.id.iv_male);
+        ivFamale = findViewById(R.id.iv_female);
 
         id = preferences.getInt("id", -1);
         name = preferences.getString("name", "未登录");

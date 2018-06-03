@@ -45,11 +45,11 @@ public class SignActivity extends Activity {
 
         queue = Volley.newRequestQueue(this);
 
-        btnSign = (Button) findViewById(R.id.btn_sign);
-        editPhone = (EditText) findViewById(R.id.edit_phone);
-        editPassword = (EditText) findViewById(R.id.edit_password);
-        editPasswordRepeat = (EditText) findViewById(R.id.edit_password_repeat);
-        ivBack = (ImageView) findViewById(R.id.iv_back);
+        btnSign = findViewById(R.id.btn_sign);
+        editPhone = findViewById(R.id.edit_phone);
+        editPassword = findViewById(R.id.edit_password);
+        editPasswordRepeat = findViewById(R.id.edit_password_repeat);
+        ivBack = findViewById(R.id.iv_back);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override

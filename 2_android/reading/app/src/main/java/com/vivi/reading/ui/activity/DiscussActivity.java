@@ -44,8 +44,8 @@ public class DiscussActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discuss);
         queue = Volley.newRequestQueue(this);
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        viewPager= (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager= findViewById(R.id.viewPager);
         tvAdd = findViewById(R.id.tv_add);
         adapterTab = new TabViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterTab);

@@ -27,10 +27,10 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        editText = (EditText) findViewById(R.id.edit);
-        ivBack = (ImageView) findViewById(R.id.iv_back);
-        tvTitle = (TextView) findViewById(R.id.tv_title);
-        tvSave = (TextView) findViewById(R.id.tv_save);
+        editText = findViewById(R.id.edit);
+        ivBack = findViewById(R.id.iv_back);
+        tvTitle = findViewById(R.id.tv_title);
+        tvSave = findViewById(R.id.tv_save);
 
         Intent intent = getIntent();
         type = intent.getStringExtra("type");

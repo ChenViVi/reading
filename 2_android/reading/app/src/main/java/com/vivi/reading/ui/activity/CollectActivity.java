@@ -56,8 +56,8 @@ public class CollectActivity extends Activity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         id = preferences.getInt("id",-1);
 
-        listView = (ListView) findViewById(R.id.list_view);
-        ivBack = (ImageView) findViewById(R.id.iv_back);
+        listView = findViewById(R.id.list_view);
+        ivBack = findViewById(R.id.iv_back);
 
         adapter = new ArticleAdapter(this,data,queue);
         listView.setEmptyView(findViewById(R.id.layout_empty_collect));

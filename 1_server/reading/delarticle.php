@@ -8,8 +8,8 @@ mysql_set_charset('utf8');
 
 $articleId = $_POST['articleId'];
 
-$sql1 = "delete from article where id = '$articleId'";
-$r = mysql_query($sql1);
+mysql_query("delete from comment where articleId = '$articleId'");
+mysql_query("delete from article where id = '$articleId'");
 $arr = array(
     'result' => 0
 );

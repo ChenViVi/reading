@@ -69,15 +69,15 @@ public class MainActivity extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         queue = Volley.newRequestQueue(this);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         drawerFragment = (DrawerFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        layout = (LinearLayout) findViewById(R.id.layout_article_info);
-        tvArticleTitle = (TextView) findViewById(R.id.tv_article_title);
-        tvArticleInfo1 = (TextView) findViewById(R.id.tv_article_info);
-        tvArticleDate = (TextView) findViewById(R.id.tv_article_date);
-        tvArticleAuthor = (TextView) findViewById(R.id.tv_action_author);
-        ivFavorite = (ImageView) findViewById(R.id.iv_favorite);
-        ivComment = (ImageView) findViewById(R.id.iv_comment);
+        layout = findViewById(R.id.layout_article_info);
+        tvArticleTitle = findViewById(R.id.tv_article_title);
+        tvArticleInfo1 = findViewById(R.id.tv_article_info);
+        tvArticleDate = findViewById(R.id.tv_article_date);
+        tvArticleAuthor = findViewById(R.id.tv_action_author);
+        ivFavorite = findViewById(R.id.iv_favorite);
+        ivComment = findViewById(R.id.iv_comment);
 
         ivFavorite.setOnClickListener(new View.OnClickListener() {
             @Override

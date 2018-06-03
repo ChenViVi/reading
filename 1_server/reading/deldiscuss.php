@@ -8,8 +8,8 @@ mysql_set_charset('utf8');
 
 $discussId = $_POST['discussId'];
 
-$sql1 = "delete from discuss where id = '$discussId'";
-$r = mysql_query($sql1);
+mysql_query("delete from discuss_commnet where did = '$discussId'");
+mysql_query("delete from discuss where id = '$discussId'");
 $arr = array(
     'result' => 0
 );

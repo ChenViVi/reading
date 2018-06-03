@@ -8,7 +8,6 @@
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:background="@color/windowBackgroundWhite">
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -17,7 +16,6 @@
         local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:background="#000000">
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -27,7 +25,6 @@
                 android:layout_height="25dp"
                 android:src="@drawable/ic_back"
                 android:layout_centerVertical="true"/>
-
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
@@ -39,7 +36,6 @@
                 android:textSize="15sp"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,63 +49,56 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="你"
+            android:text="我们接受"
             android:layout_marginTop="20dp"
             android:textSize="15sp"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="没有什么不同"
+            android:text="任何热爱算法的思想"
             android:layout_marginTop="5dp"
             android:textSize="15sp"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="只是为了爱情"
+            android:text="可以是提问"
             android:layout_marginTop="5dp"
             android:textSize="15sp"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="你的心声"
+            android:text="可以是讲解"
             android:layout_marginTop="5dp"
             android:textSize="15sp"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="在无偏见的世界里回响"
-            android:layout_marginTop="5dp"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="如果你想发表你的想法或故事"
+            android:text="请把你的奇思妙想"
             android:textSize="15sp"
             android:layout_marginTop="20dp"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="请将文章发至"
+            android:text="以邮件的形式发送到"
             android:layout_marginTop="5dp"
             android:textSize="15sp"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="butong1615@163.com"
+            android:text="18340869429@163.com"
+            android:layout_marginTop="5dp"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="期待您的来稿"
             android:layout_marginTop="20dp"
             android:textSize="15sp"/>
     </LinearLayout>
