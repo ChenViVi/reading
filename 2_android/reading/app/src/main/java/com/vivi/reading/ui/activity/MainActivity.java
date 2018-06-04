@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                                 queue.add(getActionRequest(userId,article.getId()));
                             }
                         } else if (y2 - y1 > 0) {
-                            if (articleIdFlag == items.size()-1)
+                            if (articleIdFlag == items.size())
                                 Toast.makeText(MainActivity.this, "没有更多文章了", Toast.LENGTH_SHORT).show();
                             else {
                                 article = items.get(++articleIdFlag);
