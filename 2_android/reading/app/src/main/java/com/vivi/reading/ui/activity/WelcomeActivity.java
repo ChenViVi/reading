@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -79,26 +80,6 @@ public class WelcomeActivity extends AppCompatActivity {
     private Thread connectThread;
 
     public static int PERMISSION_STORAGE = 0;
-
-    private Handler errHander = new Handler() {
-        public void handleMessage(Message msg) {
-
-            switch (msg.what) {
-                case 0:
-                    // List<BasicNameValuePair> params = new
-                    // ArrayList<BasicNameValuePair>();
-                    // params.add(new BasicNameValuePair("req", "version"));
-                    // new Thread(new
-                    // com.brbl.brblorderaide.ConnectPHPToGetJSON(URL_Ver,vHandler,params)).start();
-                    break;
-                case 1:
-                    connLogin();
-                    break;
-                default:
-                    break;
-            }
-        };
-    };
 
     private Handler vHandler = new Handler() {
         @Override
@@ -196,20 +177,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-    }
-
-    private void changeSlowly(final long delaytime, final int type) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    Thread.sleep(delaytime);
-                } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                errHander.sendEmptyMessage(type);
-            }
-        }).start();
     }
 
     public String getVersion() {
@@ -347,8 +314,15 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void connLogin() {
-        Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
-        startActivity(intent);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(WelcomeActivity.this);
+        if (preferences.getInt("id", -1) == -1){
+            Intent intent = new Intent(WelcomeActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(WelcomeActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
         finish();
     }
 

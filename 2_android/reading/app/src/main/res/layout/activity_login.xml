@@ -119,5 +119,14 @@
             android:text="注册"
             android:textColor="@color/textColorWhite"
             android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/tv_admin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="管理员"
+            android:textColor="@color/textColorWhite"
+            android:textSize="18sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
     </RelativeLayout>
 </LinearLayout>

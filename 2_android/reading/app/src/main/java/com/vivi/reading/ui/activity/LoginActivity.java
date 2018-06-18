@@ -83,6 +83,13 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.tv_admin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this ,AdminLoginActivity.class));
+                finish();
+            }
+        });
     }
 
     private StringRequest getLoginRequest(final String phone, final String password) {
@@ -110,6 +117,7 @@ public class LoginActivity extends Activity {
                             editor.putString("sign",user.getSign());
                             editor.putBoolean("isLogin",true);
                             editor.apply();
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         }
                     }

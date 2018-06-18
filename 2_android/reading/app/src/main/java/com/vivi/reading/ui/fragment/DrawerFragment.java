@@ -56,10 +56,8 @@ public class DrawerFragment extends Fragment implements OnClickListener{
     private NetworkImageView nivUserImg;
     private TextView userNickName;
     private LinearLayout userHeadLayout;
-    private Button btnLogin;
-    private Button btnSign;
     private LinearLayout layoutLog;
-    private Button btnEdit;
+    private Button btnOut;
 
 
     public void setDrawerListener(FragmentDrawerListener listener) {
@@ -69,7 +67,7 @@ public class DrawerFragment extends Fragment implements OnClickListener{
     public static List<NavDrawerItem> getData() {
         List<NavDrawerItem> data = new ArrayList<>();
         // preparing navigation drawer items
-        int[] imgId = {R.drawable.ic_drawer_collect,R.drawable.ic_drawer_catalog, R.drawable.ic_drawer_discuss, R.drawable.ic_drawer_submit,R.drawable.ic_drawer_setting};
+        int[] imgId = {R.drawable.ic_drawer_collect,R.drawable.ic_drawer_catalog, R.drawable.ic_drawer_discuss, R.drawable.ic_drawer_submit};
         for (int i = 0; i < titles.length; i++) {
             NavDrawerItem navItem = new NavDrawerItem(titles[i],imgId[i]);
             data.add(navItem);
@@ -84,14 +82,11 @@ public class DrawerFragment extends Fragment implements OnClickListener{
         titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
         mQueue = Volley.newRequestQueue(getActivity());
         pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
-        layoutLog = (LinearLayout) layout.findViewById(R.id.layout_log);
-        btnSign = (Button) layout.findViewById(R.id.btn_sign);
-        btnLogin = (Button) layout.findViewById(R.id.btn_login);
-        btnEdit = (Button) layout.findViewById(R.id.btn_edit);
-        btnLogin.setOnClickListener(this);
-        btnSign.setOnClickListener(this);
-        btnEdit.setOnClickListener(this);
+        recyclerView = layout.findViewById(R.id.drawerList);
+        btnOut = layout.findViewById(R.id.btn_sign);
+
+        btnOut =  layout.findViewById(R.id.btn_out);
+        btnOut.setOnClickListener(this);
         layout.setOnClickListener(this);
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
@@ -109,56 +104,36 @@ public class DrawerFragment extends Fragment implements OnClickListener{
             }
         }));
 
-        nivUserImg = (NetworkImageView) layout.findViewById(R.id.niv_user_img);
-        userNickName = (TextView) layout.findViewById(R.id.tv_user_name);
+        nivUserImg = layout.findViewById(R.id.niv_user_img);
+        nivUserImg.setOnClickListener(this);
+        userNickName = layout.findViewById(R.id.tv_user_name);
         nivUserImg.setDefaultImageResId(R.drawable.ic_account);
         nivUserImg.setErrorImageResId(R.drawable.ic_account);
-        /*userHeadLayout = (LinearLayout) layout.findViewById(R.id.layout_header);
-        userHeadLayout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.closeDrawer(containerView);
-                Intent intent;
-                if (pref.getBoolean("isLogin",false)) {
-                    intent = new Intent(getActivity(),UserActivity.class);
-                }
-                else{
-                    intent = new Intent(getActivity(), LoginActivity.class);
-                }
-                startActivity(intent);
-            }
-        });*/
-
         return layout;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (pref.getBoolean("isLogin",false)){
-            nivUserImg.setImageUrl(ConstUtils.BASEURL +pref.getString("imgUrl",""),new ImageLoader(mQueue,new BitmapCache()));
-            nivUserImg.setDefaultImageResId(R.drawable.ic_account);
-            nivUserImg.setErrorImageResId(R.drawable.ic_account);
-            userNickName.setText(pref.getString("name","读者 "));
-            userNickName.setVisibility(View.VISIBLE);
-            btnEdit.setVisibility(View.VISIBLE);
-            btnLogin.setVisibility(View.GONE);
-            btnSign.setVisibility(View.GONE);
-        }
-        else{
-            userNickName.setVisibility(View.GONE);
-            btnEdit.setVisibility(View.GONE);
-            btnLogin.setVisibility(View.VISIBLE);
-            btnSign.setVisibility(View.VISIBLE);
-        }
+        nivUserImg.setImageUrl(ConstUtils.BASEURL +pref.getString("imgUrl",""),new ImageLoader(mQueue,new BitmapCache()));
+        nivUserImg.setDefaultImageResId(R.drawable.ic_account);
+        nivUserImg.setErrorImageResId(R.drawable.ic_account);
+        userNickName.setText(pref.getString("name","读者 "));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_login:startActivity(new Intent(getContext(),LoginActivity.class));break;
-            case R.id.btn_sign:startActivity(new Intent(getContext(),SignActivity.class));break;
-            case R.id.btn_edit:startActivity(new Intent(getContext(),UserActivity.class));break;
+            case R.id.niv_user_img:
+                startActivity(new Intent(getContext(),UserActivity.class));
+                break;
+            case R.id.btn_out:
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
+                editor.putInt("id", -1);
+                editor.apply();
+                startActivity(new Intent(getContext(),LoginActivity.class));
+                getActivity().finish();
+                break;
         }
         mDrawerLayout.closeDrawer(containerView);
     }

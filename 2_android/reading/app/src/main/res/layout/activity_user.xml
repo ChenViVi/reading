@@ -198,7 +198,5 @@
                 android:textSize="17sp"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
-
     </LinearLayout>
-
 </LinearLayout>
